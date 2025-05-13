@@ -1,0 +1,147 @@
+:root {
+    --purple-primary: #5d2da7;
+    --light-purple: #ebdbff;
+    --input-bg: #d9d9d9;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: var(--purple-primary);
+    padding: 1rem;
+}
+
+.header .btn {
+    color: white;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.header .btn:hover, .header .btn.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+}
+
+.player-section {
+    padding: 2rem;
+}
+
+.player-section h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.form-control, .form-select {
+    background-color: var(--input-bg);
+    border: none;
+}
+
+.combat-section {
+    background-color: var(--light-purple);
+    flex-grow: 1;
+    padding: 2rem;
+    position: relative;
+}
+
+.combat-btn {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    transform: translateY(-50%);
+    background-color: var(--purple-primary);
+    color: white;
+    font-size: 1.25rem;
+    padding: 0.75rem 2.5rem;
+    border: none;
+}
+
+.combat-btn:hover {
+    background-color: #4c2486;
+}
+
+.vertical-divider {
+    width: 1px;
+    background-color: #dee2e6;
+    height: 100%;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.stats-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.combat-result {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.winner {
+    color: var(--purple-primary);
+    font-weight: bold;
+}
+
+.history-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fruit-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.json-control {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.btn-purple {
+    background-color: var(--purple-primary);
+    border-color: var(--purple-primary);
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: #4c2486;
+    border-color: #4c2486;
+    color: white;
+}

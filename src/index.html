@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond The Curse</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <img src="assets/img/logo.png" alt="Beyond the Curse" class="logo">
+            </div>
+            <div class="col">
+                <div class="d-flex gap-4">
+                    <button class="btn active" data-page="statistique-combat">Statistique combat</button>
+                    <button class="btn" data-page="historique-combat">Historique de combat</button>
+                    <button class="btn" data-page="fruit-du-demon">Fruit du démon</button>
+                    <button class="btn" data-page="modif-stats">Modif de stats</button>
+                    <button class="btn" data-page="modif-capacites">Modif capacités</button>
+                    <button class="btn" data-page="modif-paliers">Modif paliers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="flex-grow-1 d-flex flex-column">
+    <!-- Statistique Combat Page -->
+    <div id="statistique-combat" class="page active">
+        <!-- Player Forms -->
+        <div class="d-flex border-bottom">
+            <!-- P1 Section -->
+            <div class="player-section col-6 border-end">
+                <h2>P1</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label for="p1-fdd">FDD :</label>
+                        <select id="p1-fdd" class="form-select">
+                            <option selected disabled>Sélectionner FDD</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-nom">Nom :</label>
+                        <input type="text" id="p1-nom" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-palier">Palier :</label>
+                        <select id="p1-palier" class="form-select">
+                            <option selected disabled>Sélectionner Palier</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-description">Description :</label>
+                        <input type="text" id="p1-description" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p1-cap0">Cap 0 :</label>
+                        <select id="p1-cap0" class="form-select">
+                            <option selected disabled>Sélectionner Cap 0</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p1-cap1">Cap 1 :</label>
+                        <select id="p1-cap1" class="form-select">
+                            <option selected disabled>Sélectionner Cap 1</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p1-cap2">Cap 2 :</label>
+                        <select id="p1-cap2" class="form-select">
+                            <option selected disabled>Sélectionner Cap 2</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p1-cap3">Cap 3 :</label>
+                        <select id="p1-cap3" class="form-select">
+                            <option selected disabled>Sélectionner Cap 3</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p1-cap4">Cap 4 :</label>
+                        <select id="p1-cap4" class="form-select">
+                            <option selected disabled>Sélectionner Cap 4</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p1-cap5">Cap 5 :</label>
+                        <select id="p1-cap5" class="form-select">
+                            <option selected disabled>Sélectionner Cap 5</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    
+                    <!-- Statistiques supplémentaires -->
+                    <div class="col-md-6">
+                        <label for="p1-degats">Dégâts/min :</label>
+                        <input type="number" id="p1-degats" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-debuff">Debuff Entités :</label>
+                        <input type="number" id="p1-debuff" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-buff">Buff Utilisateur :</label>
+                        <input type="number" id="p1-buff" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-heal-user">Heal Utilisateur /min :</label>
+                        <input type="number" id="p1-heal-user" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-heal-entities">Heal Entités /min :</label>
+                        <input type="number" id="p1-heal-entities" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p1-pv-max">PV MAX :</label>
+                        <input type="number" id="p1-pv-max" class="form-control" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- P2 Section -->
+            <div class="player-section col-6">
+                <h2>P2</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label for="p2-fdd">FDD :</label>
+                        <select id="p2-fdd" class="form-select">
+                            <option selected disabled>Sélectionner FDD</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-nom">Nom :</label>
+                        <input type="text" id="p2-nom" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-palier">Palier :</label>
+                        <select id="p2-palier" class="form-select">
+                            <option selected disabled>Sélectionner Palier</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-description">Description :</label>
+                        <input type="text" id="p2-description" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p2-cap0">Cap 0 :</label>
+                        <select id="p2-cap0" class="form-select">
+                            <option selected disabled>Sélectionner Cap 0</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p2-cap1">Cap 1 :</label>
+                        <select id="p2-cap1" class="form-select">
+                            <option selected disabled>Sélectionner Cap 1</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p2-cap2">Cap 2 :</label>
+                        <select id="p2-cap2" class="form-select">
+                            <option selected disabled>Sélectionner Cap 2</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p2-cap3">Cap 3 :</label>
+                        <select id="p2-cap3" class="form-select">
+                            <option selected disabled>Sélectionner Cap 3</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p2-cap4">Cap 4 :</label>
+                        <select id="p2-cap4" class="form-select">
+                            <option selected disabled>Sélectionner Cap 4</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p2-cap5">Cap 5 :</label>
+                        <select id="p2-cap5" class="form-select">
+                            <option selected disabled>Sélectionner Cap 5</option>
+                            <!-- Options ajoutées dynamiquement -->
+                        </select>
+                    </div>
+                    
+                    <!-- Statistiques supplémentaires -->
+                    <div class="col-md-6">
+                        <label for="p2-degats">Dégâts/min :</label>
+                        <input type="number" id="p2-degats" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-debuff">Debuff Entités :</label>
+                        <input type="number" id="p2-debuff" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-buff">Buff Utilisateur :</label>
+                        <input type="number" id="p2-buff" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-heal-user">Heal Utilisateur /min :</label>
+                        <input type="number" id="p2-heal-user" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-heal-entities">Heal Entités /min :</label>
+                        <input type="number" id="p2-heal-entities" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="p2-pv-max">PV MAX :</label>
+                        <input type="number" id="p2-pv-max" class="form-control" min="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Combat Section -->
+        <div class="combat-section">
+            <button class="btn combat-btn" id="combat-btn">Combat</button>
+            <div id="combat-results" class="h-100 w-100">
+                <!-- Combat results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Historique de Combat Page -->
+    <div id="historique-combat" class="page">
+        <div class="container py-5">
+            <h2 class="mb-4">Historique des Combats</h2>
+            <div id="combat-history-list">
+                <!-- Les combats seront ajoutés ici dynamiquement -->
+                <div class="alert alert-info">
+                    Aucun combat n'a encore été enregistré.
+                </div>
+            </div>
+            
+            <div class="json-control">
+                <h4>Gestion de l'historique</h4>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <button id="export-history" class="btn btn-purple">Exporter l'historique (JSON)</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="import-history-file" accept=".json">
+                            <button class="btn btn-purple" id="import-history">Importer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fruit du Démon Page -->
+    <div id="fruit-du-demon" class="page">
+        <div class="container py-5">
+            <h2 class="mb-4">Fruits du Démon</h2>
+            <div id="fruits-container" class="row">
+                <!-- Les fruits seront ajoutés ici dynamiquement -->
+            </div>
+            
+            <div class="json-control">
+                <h4>Gestion des fruits du démon</h4>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <button id="export-fruits" class="btn btn-purple">Exporter les fruits (JSON)</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="import-fruits-file" accept=".json">
+                            <button class="btn btn-purple" id="import-fruits">Importer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modif de Stats Page -->
+    <div id="modif-stats" class="page">
+        <div class="container py-5">
+            <h2 class="mb-4">Modification des Statistiques</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h3>Modifier les Fruits du Démon</h3>
+                        <form id="fruit-stats-form">
+                            <div class="mb-3">
+                                <label for="fruit-select" class="form-label">Sélectionner un Fruit</label>
+                                <select id="fruit-select" class="form-select">
+                                    <option selected disabled>Choisir un fruit</option>
+                                    <!-- Options ajoutées dynamiquement -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fruit-degats" class="form-label">Dégâts/min</label>
+                                <input type="number" class="form-control" id="fruit-degats" min="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fruit-debuff" class="form-label">Debuff Entités</label>
+                                <input type="number" class="form-control" id="fruit-debuff" min="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fruit-buff" class="form-label">Buff Utilisateur</label>
+                                <input type="number" class="form-control" id="fruit-buff" min="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fruit-heal" class="form-label">Heal Utilisateur</label>
+                                <input type="number" class="form-control" id="fruit-heal" min="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fruit-pv" class="form-label">PV MAX (Palier 1)</label>
+                                <input type="number" class="form-control" id="fruit-pv" min="0">
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-purple">Enregistrer</button>
+                                <button type="button" id="delete-fruit" class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h3>Ajouter un Nouveau Fruit</h3>
+                        <form id="new-fruit-form">
+                            <div class="mb-3">
+                                <label for="new-fruit-id" class="form-label">ID du Fruit (unique)</label>
+                                <input type="text" class="form-control" id="new-fruit-id" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-fruit-name" class="form-label">Nom du Fruit</label>
+                                <input type="text" class="form-control" id="new-fruit-name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-fruit-desc" class="form-label">Description</label>
+                                <textarea class="form-control" id="new-fruit-desc" rows="2"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-fruit-degats" class="form-label">Dégâts/min</label>
+                                <input type="number" class="form-control" id="new-fruit-degats" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-fruit-debuff" class="form-label">Debuff Entités</label>
+                                <input type="number" class="form-control" id="new-fruit-debuff" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-fruit-buff" class="form-label">Buff Utilisateur</label>
+                                <input type="number" class="form-control" id="new-fruit-buff" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-fruit-heal" class="form-label">Heal Utilisateur</label>
+                                <input type="number" class="form-control" id="new-fruit-heal" min="0" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-fruit-pv" class="form-label">PV MAX (Palier 1)</label>
+                                <input type="number" class="form-control" id="new-fruit-pv" min="0" required>
+                            </div>
+                            <button type="submit" class="btn btn-purple">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="json-control mt-4">
+                <h4>Base de données</h4>
+                <div class="mb-3">
+                    <label for="database-json" class="form-label">Base de données JSON complète</label>
+                    <textarea class="form-control" id="database-json" rows="10" readOnly></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button id="update-database" class="btn btn-purple">Mettre à jour la base de données</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="reset-database" class="btn btn-danger">Réinitialiser la base de données</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modif Capacités Page -->
+    <div id="modif-capacites" class="page">
+        <div class="container py-5">
+            <h2 class="mb-4">Gestion des Capacités</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h3>Modifier une Capacité</h3>
+                        <form id="capacite-edit-form">
+                            <div class="mb-3">
+                                <label for="capacite-select" class="form-label">Sélectionner une Capacité</label>
+                                <select id="capacite-select" class="form-select">
+                                    <option selected disabled>Choisir une capacité</option>
+                                    <!-- Options ajoutées dynamiquement -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacite-niveau" class="form-label">Niveau</label>
+                                <select id="capacite-niveau" class="form-select">
+                                    <option value="1">Niveau 1</option>
+                                    <option value="2">Niveau 2</option>
+                                    <option value="3">Niveau 3</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacite-nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="capacite-nom">
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacite-description" class="form-label">Description</label>
+                                <textarea class="form-control" id="capacite-description" rows="2"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacite-type" class="form-label">Type</label>
+                                <select id="capacite-type" class="form-select">
+                                    <option value="cap0">Cap 0</option>
+                                    <option value="cap1">Cap 1</option>
+                                    <option value="cap2">Cap 2</option>
+                                    <option value="cap3">Cap 3</option>
+                                    <option value="cap4">Cap 4</option>
+                                    <option value="cap5">Cap 5</option>
+                                </select>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-purple">Enregistrer</button>
+                                <button type="button" id="delete-capacite" class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h3>Ajouter une Nouvelle Capacité</h3>
+                        <form id="new-capacite-form">
+                            <div class="mb-3">
+                                <label for="new-capacite-id" class="form-label">ID de la Capacité (unique)</label>
+                                <input type="text" class="form-control" id="new-capacite-id" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-capacite-niveau" class="form-label">Niveau</label>
+                                <select id="new-capacite-niveau" class="form-select">
+                                    <option value="1">Niveau 1</option>
+                                    <option value="2">Niveau 2</option>
+                                    <option value="3">Niveau 3</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-capacite-nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="new-capacite-nom" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-capacite-description" class="form-label">Description</label>
+                                <textarea class="form-control" id="new-capacite-description" rows="2"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-capacite-type" class="form-label">Type</label>
+                                <select id="new-capacite-type" class="form-select">
+                                    <option value="cap0">Cap 0</option>
+                                    <option value="cap1">Cap 1</option>
+                                    <option value="cap2">Cap 2</option>
+                                    <option value="cap3">Cap 3</option>
+                                    <option value="cap4">Cap 4</option>
+                                    <option value="cap5">Cap 5</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-purple">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-card mt-4">
+                <h3>Liste des Capacités</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Niveau</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="capacites-list">
+                            <!-- Liste des capacités ajoutée dynamiquement -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="json-control mt-4">
+                <h4>Gestion des capacités</h4>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <button id="export-capacites" class="btn btn-purple">Exporter les capacités (JSON)</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="import-capacites-file" accept=".json">
+                            <button class="btn btn-purple" id="import-capacites">Importer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modif Paliers Page -->
+    <div id="modif-paliers" class="page">
+        <div class="container py-5">
+            <h2 class="mb-4">Gestion des Paliers</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h3>Modifier un Palier</h3>
+                        <form id="palier-edit-form">
+                            <div class="mb-3">
+                                <label for="palier-select" class="form-label">Sélectionner un Palier</label>
+                                <select id="palier-select" class="form-select">
+                                    <option selected disabled>Choisir un palier</option>
+                                    <!-- Options ajoutées dynamiquement -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="palier-niveau" class="form-label">Niveau du Palier</label>
+                                <input type="number" class="form-control" id="palier-niveau" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="palier-pv" class="form-label">Points de Vie (PV)</label>
+                                <input type="number" class="form-control" id="palier-pv" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="palier-description" class="form-label">Description</label>
+                                <textarea class="form-control" id="palier-description" rows="2"></textarea>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-purple">Enregistrer</button>
+                                <button type="button" id="delete-palier" class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h3>Ajouter un Nouveau Palier</h3>
+                        <form id="new-palier-form">
+                            <div class="mb-3">
+                                <label for="new-palier-id" class="form-label">ID du Palier (unique)</label>
+                                <input type="text" class="form-control" id="new-palier-id" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-palier-niveau" class="form-label">Niveau du Palier</label>
+                                <input type="number" class="form-control" id="new-palier-niveau" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-palier-pv" class="form-label">Points de Vie (PV)</label>
+                                <input type="number" class="form-control" id="new-palier-pv" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-palier-description" class="form-label">Description</label>
+                                <textarea class="form-control" id="new-palier-description" rows="2"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-purple">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-card mt-4">
+                <h3>Liste des Paliers</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Niveau</th>
+                                <th>Points de Vie</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paliers-list">
+                            <!-- Liste des paliers ajoutée dynamiquement -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="json-control mt-4">
+                <h4>Gestion des paliers</h4>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <button id="export-paliers" class="btn btn-purple">Exporter les paliers (JSON)</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="import-paliers-file" accept=".json">
+                            <button class="btn btn-purple" id="import-paliers">Importer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JavaScript -->
+<script src="assets/js/stats.js"></script>
+</body>
+</html>
