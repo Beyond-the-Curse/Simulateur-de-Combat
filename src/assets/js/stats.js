@@ -3,7 +3,7 @@ const defaultDatabase = {
   fruits: {
     gomu: {
       id: "gomu",
-      name: "Gomu Gomu",
+      name: "Gomu Gomu no Mi",
       description: "Fruit du caoutchouc qui rend le corps élastique.",
       degats: 80,
       debuff: 10,
@@ -11,100 +11,45 @@ const defaultDatabase = {
       heal: 5,
       pv: 1000,
     },
-    mera: {
-      id: "mera",
-      name: "Mera Mera",
-      description: "Fruit du feu qui permet de créer et contrôler le feu.",
-      degats: 100,
-      debuff: 15,
-      buff: 10,
-      heal: 0,
-      pv: 900,
-    },
-    hie: {
-      id: "hie",
-      name: "Hie Hie",
-      description: "Fruit de la glace qui permet de créer et contrôler la glace.",
-      degats: 90,
-      debuff: 25,
+  },
+  races: {
+    humain: {
+      id: "humain",
+      name: "Humain",
+      description: "Race humaine standard.",
+      degats: 20,
+      debuff: 5,
       buff: 5,
-      heal: 0,
-      pv: 950,
+      heal: 2,
     },
-    gura: {
-      id: "gura",
-      name: "Gura Gura",
-      description: "Fruit du tremblement qui permet de créer des séismes.",
-      degats: 120,
-      debuff: 20,
+    geant: {
+      id: "geant",
+      name: "Géant",
+      description: "Race de géants avec force supérieure.",
+      degats: 40,
+      debuff: 10,
       buff: 0,
       heal: 0,
-      pv: 1100,
-    },
-    ope: {
-      id: "ope",
-      name: "Ope Ope",
-      description: "Fruit de l'opération qui permet de créer une \"salle d'opération\".",
-      degats: 70,
-      debuff: 30,
-      buff: 15,
-      heal: 20,
-      pv: 850,
-    },
-    yami: {
-      id: "yami",
-      name: "Yami Yami",
-      description: "Fruit des ténèbres qui permet de créer et contrôler les ténèbres.",
-      degats: 110,
-      debuff: 35,
-      buff: 0,
-      heal: 0,
-      pv: 1000,
     },
   },
-  capacites: {
-    // Capacités par défaut
-    cap0_niv1: {
-      id: "cap0_niv1",
-      type: "cap0",
-      niveau: 1,
-      nom: "Capacité 0 Niveau 1",
-      description: "Description de la capacité 0 niveau 1",
+  classes: {
+    guerrier: {
+      id: "guerrier",
+      name: "Guerrier",
+      description: "Classe axée sur le combat.",
+      degats: 30,
+      debuff: 5,
+      buff: 10,
+      heal: 0,
     },
-    cap0_niv2: {
-      id: "cap0_niv2",
-      type: "cap0",
-      niveau: 2,
-      nom: "Capacité 0 Niveau 2",
-      description: "Description de la capacité 0 niveau 2",
-    },
-    cap0_niv3: {
-      id: "cap0_niv3",
-      type: "cap0",
-      niveau: 3,
-      nom: "Capacité 0 Niveau 3",
-      description: "Description de la capacité 0 niveau 3",
-    },
-    cap1_niv1: {
-      id: "cap1_niv1",
-      type: "cap1",
-      niveau: 1,
-      nom: "Capacité 1 Niveau 1",
-      description: "Description de la capacité 1 niveau 1",
-    },
-    cap1_niv2: {
-      id: "cap1_niv2",
-      type: "cap1",
-      niveau: 2,
-      nom: "Capacité 1 Niveau 2",
-      description: "Description de la capacité 1 niveau 2",
-    },
-    cap1_niv3: {
-      id: "cap1_niv3",
-      type: "cap1",
-      niveau: 3,
-      nom: "Capacité 1 Niveau 3",
-      description: "Description de la capacité 1 niveau 3",
+    medecin: {
+      id: "medecin",
+      name: "Médecin",
+      description: "Classe axée sur les soins.",
+      degats: 10,
+      debuff: 0,
+      buff: 5,
+      heal: 20,
     },
   },
   paliers: {
@@ -112,31 +57,19 @@ const defaultDatabase = {
       id: "palier1",
       niveau: 1,
       pv: 100,
-      description: "Palier de base, le joueur a 100 PV."
+      description: "Palier de base, le joueur a 100 PV.",
     },
-    palier10: {
-      id: "palier10",
-      niveau: 10,
+    palier2: {
+      id: "palier2",
+      niveau: 2,
       pv: 200,
-      description: "Palier intermédiaire, le joueur a 200 PV."
+      description: "Palier intermédiaire, le joueur a 200 PV.",
     },
-    palier20: {
-      id: "palier20",
-      niveau: 20,
+    palier3: {
+      id: "palier3",
+      niveau: 3,
       pv: 300,
-      description: "Palier avancé, le joueur a 300 PV."
-    },
-    palier30: {
-      id: "palier30",
-      niveau: 30,
-      pv: 400,
-      description: "Palier expert, le joueur a 400 PV."
-    },
-    palier40: {
-      id: "palier40",
-      niveau: 40,
-      pv: 500,
-      description: "Palier maître, le joueur a 500 PV."
+      description: "Palier avancé, le joueur a 300 PV.",
     },
   },
   history: [],
@@ -153,13 +86,17 @@ const Database = {
       if (storedData) {
         this.data = JSON.parse(storedData)
 
-        // Vérifier si la structure capacites existe, sinon l'ajouter
-        if (!this.data.capacites) {
-          this.data.capacites = defaultDatabase.capacites
+        // Vérifier si les structures existent, sinon les ajouter
+        if (!this.data.races) {
+          this.data.races = defaultDatabase.races
           this.save()
         }
 
-        // Vérifier si la structure paliers existe, sinon l'ajouter
+        if (!this.data.classes) {
+          this.data.classes = defaultDatabase.classes
+          this.save()
+        }
+
         if (!this.data.paliers) {
           this.data.paliers = defaultDatabase.paliers
           this.save()
@@ -245,67 +182,83 @@ const Database = {
     return this.save()
   },
 
-  // Obtenir toutes les capacités
-  getCapacites() {
-    return this.data.capacites || {}
+  // Obtenir toutes les races
+  getRaces() {
+    return this.data.races || {}
   },
 
-  // Obtenir les capacités par type
-  getCapacitesByType(type) {
-    const capacites = this.getCapacites()
-    const result = {}
+  // Obtenir une race spécifique
+  getRace(id) {
+    return this.data.races ? this.data.races[id] : null
+  },
 
-    for (const id in capacites) {
-      if (capacites[id].type === type) {
-        result[id] = capacites[id]
-      }
+  // Mettre à jour une race
+  updateRace(id, raceData) {
+    if (!this.data.races) {
+      this.data.races = {}
     }
-
-    return result
-  },
-
-  // Obtenir une capacité spécifique
-  getCapacite(id) {
-    return this.data.capacites ? this.data.capacites[id] : null
-  },
-
-  // Mettre à jour une capacité
-  updateCapacite(id, capaciteData) {
-    if (!this.data.capacites) {
-      this.data.capacites = {}
-    }
-
-    this.data.capacites[id] = { ...capaciteData, id }
+    this.data.races[id] = { ...raceData, id }
     return this.save()
   },
 
-  // Ajouter une nouvelle capacité
-  addCapacite(id, capaciteData) {
-    if (!this.data.capacites) {
-      this.data.capacites = {}
+  // Ajouter une nouvelle race
+  addRace(id, raceData) {
+    if (!this.data.races) {
+      this.data.races = {}
     }
-
-    if (this.data.capacites[id]) {
+    if (this.data.races[id]) {
       return false // ID déjà existant
     }
-
-    this.data.capacites[id] = { ...capaciteData, id }
+    this.data.races[id] = { ...raceData, id }
     return this.save()
   },
 
-  // Supprimer une capacité
-  deleteCapacite(id) {
-    if (!this.data.capacites || !this.data.capacites[id]) {
-      return false // Capacité inexistante
+  // Supprimer une race
+  deleteRace(id) {
+    if (!this.data.races || !this.data.races[id]) {
+      return false // Race inexistante
     }
-
-    delete this.data.capacites[id]
+    delete this.data.races[id]
     return this.save()
   },
 
-  // Importer les capacités
-  importCapacites(capacitesData) {
-    this.data.capacites = capacitesData
+  // Obtenir toutes les classes
+  getClasses() {
+    return this.data.classes || {}
+  },
+
+  // Obtenir une classe spécifique
+  getClasse(id) {
+    return this.data.classes ? this.data.classes[id] : null
+  },
+
+  // Mettre à jour une classe
+  updateClasse(id, classeData) {
+    if (!this.data.classes) {
+      this.data.classes = {}
+    }
+    this.data.classes[id] = { ...classeData, id }
+    return this.save()
+  },
+
+  // Ajouter une nouvelle classe
+  addClasse(id, classeData) {
+    if (!this.data.classes) {
+      this.data.classes = {}
+    }
+    if (this.data.classes[id]) {
+      return false // ID déjà existant
+    }
+    this.data.classes[id] = { ...classeData, id }
+    return this.save()
+  },
+
+  // Supprimer une classe
+  deleteClasse(id) {
+    if (!this.data.classes || !this.data.classes[id]) {
+      return false // Classe inexistante
+    }
+    delete this.data.classes[id]
     return this.save()
   },
 
@@ -314,9 +267,21 @@ const Database = {
     return this.data.paliers || {}
   },
 
-  // Obtenir un palier spécifique
+  // Obtenir un palier spécifique par ID
   getPalier(id) {
     return this.data.paliers ? this.data.paliers[id] : null
+  },
+
+  // Obtenir un palier spécifique par niveau
+  getPalierByNiveau(niveau) {
+    if (!this.data.paliers) return null
+
+    for (const id in this.data.paliers) {
+      if (this.data.paliers[id].niveau === niveau) {
+        return this.data.paliers[id]
+      }
+    }
+    return null
   },
 
   // Mettre à jour un palier
@@ -325,8 +290,18 @@ const Database = {
       this.data.paliers = {}
     }
 
+    // Vérifier si un autre palier a déjà ce niveau (autre que celui qu'on modifie)
+    const existingPalier = Object.values(this.data.paliers).find((p) => p.niveau === palierData.niveau && p.id !== id)
+
+    if (existingPalier) {
+      return {
+        success: false,
+        message: `Un palier avec le niveau ${palierData.niveau} existe déjà (${existingPalier.id}).`,
+      }
+    }
+
     this.data.paliers[id] = { ...palierData, id }
-    return this.save()
+    return { success: this.save(), message: "Palier mis à jour avec succès." }
   },
 
   // Ajouter un nouveau palier
@@ -336,11 +311,21 @@ const Database = {
     }
 
     if (this.data.paliers[id]) {
-      return false // ID déjà existant
+      return { success: false, message: `Un palier avec l'ID ${id} existe déjà.` }
+    }
+
+    // Vérifier si un autre palier a déjà ce niveau
+    const existingPalier = Object.values(this.data.paliers).find((p) => p.niveau === palierData.niveau)
+
+    if (existingPalier) {
+      return {
+        success: false,
+        message: `Un palier avec le niveau ${palierData.niveau} existe déjà (${existingPalier.id}).`,
+      }
     }
 
     this.data.paliers[id] = { ...palierData, id }
-    return this.save()
+    return { success: this.save(), message: "Palier ajouté avec succès." }
   },
 
   // Supprimer un palier
@@ -361,11 +346,14 @@ const Database = {
 
   // Obtenir l'historique des combats
   getHistory() {
-    return this.data.history
+    return this.data.history || []
   },
 
   // Ajouter un combat à l'historique
   addCombat(combatData) {
+    if (!this.data.history) {
+      this.data.history = []
+    }
     this.data.history.unshift(combatData) // Ajouter au début
     return this.save()
   },
@@ -398,20 +386,27 @@ const Database = {
     try {
       const parsedData = JSON.parse(jsonData)
       // Vérifier la structure minimale
-      if (!parsedData.fruits || !parsedData.history) {
-        throw new Error("Format de données invalide")
+      if (!parsedData.fruits) {
+        throw new Error("Format de données invalide: manque de propriété 'fruits'")
       }
 
       this.data = parsedData
 
-      // S'assurer que la structure capacites existe
-      if (!this.data.capacites) {
-        this.data.capacites = defaultDatabase.capacites
+      // S'assurer que toutes les structures existent
+      if (!this.data.races) {
+        this.data.races = defaultDatabase.races
       }
 
-      // S'assurer que la structure paliers existe
+      if (!this.data.classes) {
+        this.data.classes = defaultDatabase.classes
+      }
+
       if (!this.data.paliers) {
         this.data.paliers = defaultDatabase.paliers
+      }
+
+      if (!this.data.history) {
+        this.data.history = []
       }
 
       return this.save()
@@ -447,102 +442,133 @@ document.addEventListener("DOMContentLoaded", () => {
       const pageId = this.getAttribute("data-page")
       document.getElementById(pageId).classList.add("active")
 
-      // Mettre à jour le JSON dans l'éditeur
+      // Mettre à jour l'interface selon la page
       if (pageId === "modif-stats") {
         document.getElementById("database-json").value = Database.export()
-      }
-
-      // Mettre à jour la liste des capacités
-      if (pageId === "modif-capacites") {
-        updateCapacitesList()
-      }
-
-      // Mettre à jour la liste des paliers
-      if (pageId === "modif-paliers") {
+      } else if (pageId === "listes") {
+        updateListesPage()
+      } else if (pageId === "modif-paliers") {
         updatePaliersList()
       }
     })
   })
 
-  // Pré-remplir les champs en fonction du FDD sélectionné
-  document.getElementById("p1-fdd").addEventListener("change", function () {
-    const selectedFruit = this.value
-    const fruit = Database.getFruit(selectedFruit)
+  // Fonctions pour calculer les stats globales
+  function calculateGlobalStats(joueur) {
+    const fddId = joueur === "p1" ? document.getElementById("p1-fdd").value : document.getElementById("p2-fdd").value
+    const raceId = joueur === "p1" ? document.getElementById("p1-race").value : document.getElementById("p2-race").value
+    const classeId =
+      joueur === "p1" ? document.getElementById("p1-classe").value : document.getElementById("p2-classe").value
 
+    // Valeurs par défaut
+    const stats = {
+      degats: 0,
+      debuff: 0,
+      buff: 0,
+      heal: 0,
+      pv: 0,
+    }
+
+    // Ajouter stats du FDD
+    const fruit = Database.getFruit(fddId)
     if (fruit) {
-      document.getElementById("p1-degats").value = fruit.degats
-      document.getElementById("p1-debuff").value = fruit.debuff
-      document.getElementById("p1-buff").value = fruit.buff
-      document.getElementById("p1-heal-user").value = fruit.heal
+      stats.degats += fruit.degats || 0
+      stats.debuff += fruit.debuff || 0
+      stats.buff += fruit.buff || 0
+      stats.heal += fruit.heal || 0
+      stats.pv = fruit.pv || 0
+    }
+
+    // Ajouter stats de la race
+    const race = Database.getRace(raceId)
+    if (race) {
+      stats.degats += race.degats || 0
+      stats.debuff += race.debuff || 0
+      stats.buff += race.buff || 0
+      stats.heal += race.heal || 0
+    }
+
+    // Ajouter stats de la classe
+    const classe = Database.getClasse(classeId)
+    if (classe) {
+      stats.degats += classe.degats || 0
+      stats.debuff += classe.debuff || 0
+      stats.buff += classe.buff || 0
+      stats.heal += classe.heal || 0
+    }
+
+    return stats
+  }
+
+  // Mettre à jour les stats affichées
+  function updatePlayerStats(joueur) {
+    const stats = calculateGlobalStats(joueur)
+
+    // Mettre à jour les champs
+    if (joueur === "p1") {
+      document.getElementById("p1-degats").value = stats.degats
+      document.getElementById("p1-debuff").value = stats.debuff
+      document.getElementById("p1-buff").value = stats.buff
+      document.getElementById("p1-heal-user").value = stats.heal
 
       // Calculer PV MAX en fonction du palier
-      const palier = document.getElementById("p1-palier").value || 1
-      document.getElementById("p1-pv-max").value = fruit.pv * palier
+      const palierSelect = document.getElementById("p1-palier")
+      const palierNiveau = Number.parseInt(palierSelect.value)
+      if (palierNiveau) {
+        const palier = Database.getPalierByNiveau(palierNiveau)
+        if (palier) {
+          document.getElementById("p1-pv-max").value = palier.pv
+        }
+      }
+    } else {
+      document.getElementById("p2-degats").value = stats.degats
+      document.getElementById("p2-debuff").value = stats.debuff
+      document.getElementById("p2-buff").value = stats.buff
+      document.getElementById("p2-heal-user").value = stats.heal
+
+      // Calculer PV MAX en fonction du palier
+      const palierSelect = document.getElementById("p2-palier")
+      const palierNiveau = Number.parseInt(palierSelect.value)
+      if (palierNiveau) {
+        const palier = Database.getPalierByNiveau(palierNiveau)
+        if (palier) {
+          document.getElementById("p2-pv-max").value = palier.pv
+        }
+      }
     }
+  }
+  // Événements pour les sélecteurs de P1
+  ;["p1-fdd", "p1-race", "p1-classe"].forEach((id) => {
+    document.getElementById(id).addEventListener("change", () => {
+      updatePlayerStats("p1")
+    })
   })
 
-  document.getElementById("p2-fdd").addEventListener("change", function () {
-    const selectedFruit = this.value
-    const fruit = Database.getFruit(selectedFruit)
-
-    if (fruit) {
-      document.getElementById("p2-degats").value = fruit.degats
-      document.getElementById("p2-debuff").value = fruit.debuff
-      document.getElementById("p2-buff").value = fruit.buff
-      document.getElementById("p2-heal-user").value = fruit.heal
-
-      // Calculer PV MAX en fonction du palier
-      const palier = document.getElementById("p2-palier").value || 1
-      document.getElementById("p2-pv-max").value = fruit.pv * palier
-    }
+  // Événements pour les sélecteurs de P2
+  ;["p2-fdd", "p2-race", "p2-classe"].forEach((id) => {
+    document.getElementById(id).addEventListener("change", () => {
+      updatePlayerStats("p2")
+    })
   })
 
   // Ajuster PV MAX quand le palier change
   document.getElementById("p1-palier").addEventListener("change", function () {
-    const selectedFruit = document.getElementById("p1-fdd").value
-    const selectedPalier = Number.parseInt(this.value) || 1
-    const fruit = Database.getFruit(selectedFruit)
-
-    if (fruit) {
-      // Rechercher le palier sélectionné dans la base de données
-      const paliers = Database.getPaliers()
-      const pvMultiplier = 1
-
-      // Trouver le palier correspondant
-      for (const id in paliers) {
-        if (paliers[id].niveau === selectedPalier) {
-          // Utiliser directement la valeur de PV du palier
-          document.getElementById("p1-pv-max").value = paliers[id].pv
-          return
-        }
+    const palierNiveau = Number.parseInt(this.value)
+    if (palierNiveau) {
+      const palier = Database.getPalierByNiveau(palierNiveau)
+      if (palier) {
+        document.getElementById("p1-pv-max").value = palier.pv
       }
-
-      // Si palier non trouvé, utiliser la méthode précédente comme fallback
-      document.getElementById("p1-pv-max").value = fruit.pv * selectedPalier
     }
   })
 
   document.getElementById("p2-palier").addEventListener("change", function () {
-    const selectedFruit = document.getElementById("p2-fdd").value
-    const selectedPalier = Number.parseInt(this.value) || 1
-    const fruit = Database.getFruit(selectedFruit)
-
-    if (fruit) {
-      // Rechercher le palier sélectionné dans la base de données
-      const paliers = Database.getPaliers()
-      const pvMultiplier = 1
-
-      // Trouver le palier correspondant
-      for (const id in paliers) {
-        if (paliers[id].niveau === selectedPalier) {
-          // Utiliser directement la valeur de PV du palier
-          document.getElementById("p2-pv-max").value = paliers[id].pv
-          return
-        }
+    const palierNiveau = Number.parseInt(this.value)
+    if (palierNiveau) {
+      const palier = Database.getPalierByNiveau(palierNiveau)
+      if (palier) {
+        document.getElementById("p2-pv-max").value = palier.pv
       }
-
-      // Si palier non trouvé, utiliser la méthode précédente comme fallback
-      document.getElementById("p2-pv-max").value = fruit.pv * selectedPalier
     }
   })
 
@@ -554,6 +580,10 @@ document.addEventListener("DOMContentLoaded", () => {
       nom: document.getElementById("p1-nom").value || "Joueur 1",
       fdd: document.getElementById("p1-fdd").value,
       fddName: document.getElementById("p1-fdd").options[document.getElementById("p1-fdd").selectedIndex].text,
+      race: document.getElementById("p1-race").value,
+      raceName: document.getElementById("p1-race").options[document.getElementById("p1-race").selectedIndex].text,
+      classe: document.getElementById("p1-classe").value,
+      classeName: document.getElementById("p1-classe").options[document.getElementById("p1-classe").selectedIndex].text,
       degats: Number.parseFloat(document.getElementById("p1-degats").value) || 0,
       healUser: Number.parseFloat(document.getElementById("p1-heal-user").value) || 0,
       pvMax: Number.parseFloat(document.getElementById("p1-pv-max").value) || 1000,
@@ -563,46 +593,41 @@ document.addEventListener("DOMContentLoaded", () => {
       nom: document.getElementById("p2-nom").value || "Joueur 2",
       fdd: document.getElementById("p2-fdd").value,
       fddName: document.getElementById("p2-fdd").options[document.getElementById("p2-fdd").selectedIndex].text,
+      race: document.getElementById("p2-race").value,
+      raceName: document.getElementById("p2-race").options[document.getElementById("p2-race").selectedIndex].text,
+      classe: document.getElementById("p2-classe").value,
+      classeName: document.getElementById("p2-classe").options[document.getElementById("p2-classe").selectedIndex].text,
       degats: Number.parseFloat(document.getElementById("p2-degats").value) || 0,
       healUser: Number.parseFloat(document.getElementById("p2-heal-user").value) || 0,
       pvMax: Number.parseFloat(document.getElementById("p2-pv-max").value) || 1000,
     }
 
     // Calculer selon la formule donnée
-    // Elément 1 : Dégâts/min-60% = VAR 1, Heal Utilisateur = VAR 1.5, PV MAX Elément 1 = VARPV1
-    const var1 = p1.degats * 0.4 // Dégâts/min-60%
-    const var1_5 = p1.healUser
-    const varpv1 = p1.pvMax
+    // Dégâts réels = Dégâts par minute - 60%
+    const degatsReelsP1 = p1.degats * 0.4
+    const degatsReelsP2 = p2.degats * 0.4
 
-    // Elément 2 : Dégâts/min-60% = VAR 2, Heal Utilisateur = VAR 2.5, PV MAX Elément 2 = VARPV2
-    const var2 = p2.degats * 0.4 // Dégâts/min-60%
-    const var2_5 = p2.healUser
-    const varpv2 = p2.pvMax
+    // Dégâts nets = Dégâts réels - Heal par minute de l'adversaire
+    const degatsNetsP1 = degatsReelsP1 - p2.healUser
+    const degatsNetsP2 = degatsReelsP2 - p1.healUser
 
-    // Elément 1 VS Elément 2
-    // VAR 1 - VAR 2.5 = VAR_DEGATSFINAUX1
-    const var_degatsfinaux1 = var1 - var2_5
-    // (VARPV2 / VAR_DEGATSFINAUX1) = Temps Combat 1
-    const tempsCombat1 = var_degatsfinaux1 > 0 ? varpv2 / var_degatsfinaux1 : Number.POSITIVE_INFINITY
+    // Calcul du TTK (Time To Kill)
+    const ttkP1 = degatsNetsP1 > 0 ? p2.pvMax / degatsNetsP1 : Number.POSITIVE_INFINITY
+    const ttkP2 = degatsNetsP2 > 0 ? p1.pvMax / degatsNetsP2 : Number.POSITIVE_INFINITY
 
-    // VAR 2- VAR 1.5 = VAR_DEGATSFINAUX2
-    const var_degatsfinaux2 = var2 - var1_5
-    // (VARPV1/ VAR_DEGATSFINAUX2) = Temps Combat 2
-    const tempsCombat2 = var_degatsfinaux2 > 0 ? varpv1 / var_degatsfinaux2 : Number.POSITIVE_INFINITY
-
-    // Si "Temps combat 1" < "Temps combat 2", alors Temps combat 1 à gagné. Inversement sinon.
+    // Déterminer le vainqueur
     let winner, loser, winnerTime, loserTime
 
-    if (tempsCombat1 < tempsCombat2) {
+    if (ttkP1 < ttkP2) {
       winner = p1
       loser = p2
-      winnerTime = tempsCombat1
-      loserTime = tempsCombat2
+      winnerTime = ttkP1
+      loserTime = ttkP2
     } else {
       winner = p2
       loser = p1
-      winnerTime = tempsCombat2
-      loserTime = tempsCombat1
+      winnerTime = ttkP2
+      loserTime = ttkP1
     }
 
     // Afficher les résultats
@@ -614,21 +639,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="col-md-6">
                         <h4>${p1.nom} (${p1.fddName})</h4>
                         <ul class="list-unstyled">
+                            <li>Race: ${p1.raceName}</li>
+                            <li>Classe: ${p1.classeName}</li>
                             <li>Dégâts/min: ${p1.degats}</li>
-                            <li>Dégâts/min après réduction (40%): ${var1.toFixed(2)}</li>
-                            <li>Heal Utilisateur: ${var1_5}</li>
-                            <li>PV MAX: ${varpv1}</li>
-                            <li>Temps pour vaincre l'adversaire: ${tempsCombat1 === Number.POSITIVE_INFINITY ? "∞" : tempsCombat1.toFixed(2)} minutes</li>
+                            <li>Dégâts/min après réduction (60%): ${degatsReelsP1.toFixed(2)}</li>
+                            <li>Heal Utilisateur: ${p1.healUser}</li>
+                            <li>PV MAX: ${p1.pvMax}</li>
+                            <li>Temps pour vaincre l'adversaire: ${ttkP1 === Number.POSITIVE_INFINITY ? "∞" : ttkP1.toFixed(2)} minutes</li>
                         </ul>
                     </div>
                     <div class="col-md-6">
                         <h4>${p2.nom} (${p2.fddName})</h4>
                         <ul class="list-unstyled">
+                            <li>Race: ${p2.raceName}</li>
+                            <li>Classe: ${p2.classeName}</li>
                             <li>Dégâts/min: ${p2.degats}</li>
-                            <li>Dégâts/min après réduction (40%): ${var2.toFixed(2)}</li>
-                            <li>Heal Utilisateur: ${var2_5}</li>
-                            <li>PV MAX: ${varpv2}</li>
-                            <li>Temps pour vaincre l'adversaire: ${tempsCombat2 === Number.POSITIVE_INFINITY ? "∞" : tempsCombat2.toFixed(2)} minutes</li>
+                            <li>Dégâts/min après réduction (60%): ${degatsReelsP2.toFixed(2)}</li>
+                            <li>Heal Utilisateur: ${p2.healUser}</li>
+                            <li>PV MAX: ${p2.pvMax}</li>
+                            <li>Temps pour vaincre l'adversaire: ${ttkP2 === Number.POSITIVE_INFINITY ? "∞" : ttkP2.toFixed(2)} minutes</li>
                         </ul>
                     </div>
                 </div>
@@ -660,11 +689,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const fruit = Database.getFruit(selectedFruit)
 
     if (fruit) {
-      document.getElementById("fruit-degats").value = fruit.degats
-      document.getElementById("fruit-debuff").value = fruit.debuff
-      document.getElementById("fruit-buff").value = fruit.buff
-      document.getElementById("fruit-heal").value = fruit.heal
-      document.getElementById("fruit-pv").value = fruit.pv
+      document.getElementById("fruit-degats").value = fruit.degats || 0
+      document.getElementById("fruit-debuff").value = fruit.debuff || 0
+      document.getElementById("fruit-buff").value = fruit.buff || 0
+      document.getElementById("fruit-heal").value = fruit.heal || 0
+      document.getElementById("fruit-pv").value = fruit.pv || 0
     }
   })
 
@@ -752,6 +781,196 @@ document.addEventListener("DOMContentLoaded", () => {
         this.reset()
       } else {
         alert("Une erreur s'est produite lors de l'ajout du fruit.")
+      }
+    }
+  })
+
+  // Gestion des races
+  document.getElementById("race-select").addEventListener("change", function () {
+    const selectedRace = this.value
+    const race = Database.getRace(selectedRace)
+
+    if (race) {
+      document.getElementById("race-degats").value = race.degats || 0
+      document.getElementById("race-debuff").value = race.debuff || 0
+      document.getElementById("race-buff").value = race.buff || 0
+      document.getElementById("race-heal").value = race.heal || 0
+    }
+  })
+
+  document.getElementById("race-stats-form").addEventListener("submit", (e) => {
+    e.preventDefault()
+    const selectedRace = document.getElementById("race-select").value
+
+    if (selectedRace) {
+      const race = Database.getRace(selectedRace)
+      if (race) {
+        const updatedRace = {
+          ...race,
+          degats: Number.parseFloat(document.getElementById("race-degats").value) || 0,
+          debuff: Number.parseFloat(document.getElementById("race-debuff").value) || 0,
+          buff: Number.parseFloat(document.getElementById("race-buff").value) || 0,
+          heal: Number.parseFloat(document.getElementById("race-heal").value) || 0,
+        }
+
+        Database.updateRace(selectedRace, updatedRace)
+        alert(`Les statistiques de la race ${race.name} ont été mises à jour.`)
+        updateUI()
+      }
+    }
+  })
+
+  document.getElementById("delete-race").addEventListener("click", () => {
+    const selectedRace = document.getElementById("race-select").value
+
+    if (selectedRace) {
+      const race = Database.getRace(selectedRace)
+      if (race) {
+        if (confirm(`Êtes-vous sûr de vouloir supprimer la race ${race.name} ?`)) {
+          if (Database.deleteRace(selectedRace)) {
+            alert(`La race ${race.name} a été supprimée avec succès.`)
+            updateUI()
+
+            // Réinitialiser le formulaire
+            document.getElementById("race-select").selectedIndex = 0
+            document.getElementById("race-degats").value = ""
+            document.getElementById("race-debuff").value = ""
+            document.getElementById("race-buff").value = ""
+            document.getElementById("race-heal").value = ""
+          } else {
+            alert("Une erreur s'est produite lors de la suppression de la race.")
+          }
+        }
+      }
+    } else {
+      alert("Veuillez sélectionner une race à supprimer.")
+    }
+  })
+
+  document.getElementById("new-race-form").addEventListener("submit", function (e) {
+    e.preventDefault()
+    const raceId = document.getElementById("new-race-id").value.trim()
+    const raceName = document.getElementById("new-race-name").value.trim()
+    const raceDesc = document.getElementById("new-race-desc").value.trim()
+
+    if (raceId && raceName) {
+      // Vérifier si l'ID existe déjà
+      if (Database.getRace(raceId)) {
+        alert(`Une race avec l'ID "${raceId}" existe déjà. Veuillez choisir un autre ID.`)
+        return
+      }
+
+      const newRace = {
+        id: raceId,
+        name: raceName,
+        description: raceDesc || `Description de ${raceName}`,
+        degats: Number.parseFloat(document.getElementById("new-race-degats").value) || 0,
+        debuff: Number.parseFloat(document.getElementById("new-race-debuff").value) || 0,
+        buff: Number.parseFloat(document.getElementById("new-race-buff").value) || 0,
+        heal: Number.parseFloat(document.getElementById("new-race-heal").value) || 0,
+      }
+
+      if (Database.addRace(raceId, newRace)) {
+        alert(`La race ${raceName} a été ajoutée avec succès.`)
+        updateUI()
+        this.reset()
+      } else {
+        alert("Une erreur s'est produite lors de l'ajout de la race.")
+      }
+    }
+  })
+
+  // Gestion des classes
+  document.getElementById("classe-select").addEventListener("change", function () {
+    const selectedClasse = this.value
+    const classe = Database.getClasse(selectedClasse)
+
+    if (classe) {
+      document.getElementById("classe-degats").value = classe.degats || 0
+      document.getElementById("classe-debuff").value = classe.debuff || 0
+      document.getElementById("classe-buff").value = classe.buff || 0
+      document.getElementById("classe-heal").value = classe.heal || 0
+    }
+  })
+
+  document.getElementById("classe-stats-form").addEventListener("submit", (e) => {
+    e.preventDefault()
+    const selectedClasse = document.getElementById("classe-select").value
+
+    if (selectedClasse) {
+      const classe = Database.getClasse(selectedClasse)
+      if (classe) {
+        const updatedClasse = {
+          ...classe,
+          degats: Number.parseFloat(document.getElementById("classe-degats").value) || 0,
+          debuff: Number.parseFloat(document.getElementById("classe-debuff").value) || 0,
+          buff: Number.parseFloat(document.getElementById("classe-buff").value) || 0,
+          heal: Number.parseFloat(document.getElementById("classe-heal").value) || 0,
+        }
+
+        Database.updateClasse(selectedClasse, updatedClasse)
+        alert(`Les statistiques de la classe ${classe.name} ont été mises à jour.`)
+        updateUI()
+      }
+    }
+  })
+
+  document.getElementById("delete-classe").addEventListener("click", () => {
+    const selectedClasse = document.getElementById("classe-select").value
+
+    if (selectedClasse) {
+      const classe = Database.getClasse(selectedClasse)
+      if (classe) {
+        if (confirm(`Êtes-vous sûr de vouloir supprimer la classe ${classe.name} ?`)) {
+          if (Database.deleteClasse(selectedClasse)) {
+            alert(`La classe ${classe.name} a été supprimée avec succès.`)
+            updateUI()
+
+            // Réinitialiser le formulaire
+            document.getElementById("classe-select").selectedIndex = 0
+            document.getElementById("classe-degats").value = ""
+            document.getElementById("classe-debuff").value = ""
+            document.getElementById("classe-buff").value = ""
+            document.getElementById("classe-heal").value = ""
+          } else {
+            alert("Une erreur s'est produite lors de la suppression de la classe.")
+          }
+        }
+      }
+    } else {
+      alert("Veuillez sélectionner une classe à supprimer.")
+    }
+  })
+
+  document.getElementById("new-classe-form").addEventListener("submit", function (e) {
+    e.preventDefault()
+    const classeId = document.getElementById("new-classe-id").value.trim()
+    const classeName = document.getElementById("new-classe-name").value.trim()
+    const classeDesc = document.getElementById("new-classe-desc").value.trim()
+
+    if (classeId && classeName) {
+      // Vérifier si l'ID existe déjà
+      if (Database.getClasse(classeId)) {
+        alert(`Une classe avec l'ID "${classeId}" existe déjà. Veuillez choisir un autre ID.`)
+        return
+      }
+
+      const newClasse = {
+        id: classeId,
+        name: classeName,
+        description: classeDesc || `Description de ${classeName}`,
+        degats: Number.parseFloat(document.getElementById("new-classe-degats").value) || 0,
+        debuff: Number.parseFloat(document.getElementById("new-classe-debuff").value) || 0,
+        buff: Number.parseFloat(document.getElementById("new-classe-buff").value) || 0,
+        heal: Number.parseFloat(document.getElementById("new-classe-heal").value) || 0,
+      }
+
+      if (Database.addClasse(classeId, newClasse)) {
+        alert(`La classe ${classeName} a été ajoutée avec succès.`)
+        updateUI()
+        this.reset()
+      } else {
+        alert("Une erreur s'est produite lors de l'ajout de la classe.")
       }
     }
   })
@@ -870,155 +1089,6 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.readAsText(file)
   })
 
-  // Gestion des capacités
-
-  // Sélection d'une capacité
-  document.getElementById("capacite-select").addEventListener("change", function () {
-    const selectedCapacite = this.value
-    const capacite = Database.getCapacite(selectedCapacite)
-
-    if (capacite) {
-      document.getElementById("capacite-niveau").value = capacite.niveau
-      document.getElementById("capacite-nom").value = capacite.nom
-      document.getElementById("capacite-description").value = capacite.description || ""
-      document.getElementById("capacite-type").value = capacite.type
-    }
-  })
-
-  // Modification d'une capacité
-  document.getElementById("capacite-edit-form").addEventListener("submit", (e) => {
-    e.preventDefault()
-    const selectedCapacite = document.getElementById("capacite-select").value
-
-    if (selectedCapacite) {
-      const capacite = Database.getCapacite(selectedCapacite)
-      if (capacite) {
-        const updatedCapacite = {
-          ...capacite,
-          niveau: Number.parseInt(document.getElementById("capacite-niveau").value) || 1,
-          nom: document.getElementById("capacite-nom").value,
-          description: document.getElementById("capacite-description").value,
-          type: document.getElementById("capacite-type").value,
-        }
-
-        if (Database.updateCapacite(selectedCapacite, updatedCapacite)) {
-          alert(`La capacité ${updatedCapacite.nom} a été mise à jour.`)
-          updateCapacitesList()
-          updateCapacitesOptions()
-        } else {
-          alert("Une erreur s'est produite lors de la mise à jour de la capacité.")
-        }
-      }
-    } else {
-      alert("Veuillez sélectionner une capacité à modifier.")
-    }
-  })
-
-  // Suppression d'une capacité
-  document.getElementById("delete-capacite").addEventListener("click", () => {
-    const selectedCapacite = document.getElementById("capacite-select").value
-
-    if (selectedCapacite) {
-      const capacite = Database.getCapacite(selectedCapacite)
-      if (capacite) {
-        if (confirm(`Êtes-vous sûr de vouloir supprimer la capacité ${capacite.nom} ?`)) {
-          if (Database.deleteCapacite(selectedCapacite)) {
-            alert(`La capacité ${capacite.nom} a été supprimée avec succès.`)
-            updateCapacitesList()
-            updateCapacitesOptions()
-
-            // Réinitialiser le formulaire
-            document.getElementById("capacite-select").selectedIndex = 0
-            document.getElementById("capacite-niveau").value = "1"
-            document.getElementById("capacite-nom").value = ""
-            document.getElementById("capacite-description").value = ""
-            document.getElementById("capacite-type").value = "cap0"
-          } else {
-            alert("Une erreur s'est produite lors de la suppression de la capacité.")
-          }
-        }
-      }
-    } else {
-      alert("Veuillez sélectionner une capacité à supprimer.")
-    }
-  })
-
-  // Ajout d'une nouvelle capacité
-  document.getElementById("new-capacite-form").addEventListener("submit", function (e) {
-    e.preventDefault()
-    const capaciteId = document.getElementById("new-capacite-id").value.trim()
-    const capaciteNom = document.getElementById("new-capacite-nom").value.trim()
-
-    if (capaciteId && capaciteNom) {
-      // Vérifier si l'ID existe déjà
-      if (Database.getCapacite(capaciteId)) {
-        alert(`Une capacité avec l'ID "${capaciteId}" existe déjà. Veuillez choisir un autre ID.`)
-        return
-      }
-
-      const newCapacite = {
-        id: capaciteId,
-        niveau: Number.parseInt(document.getElementById("new-capacite-niveau").value) || 1,
-        nom: capaciteNom,
-        description: document.getElementById("new-capacite-description").value,
-        type: document.getElementById("new-capacite-type").value,
-      }
-
-      if (Database.addCapacite(capaciteId, newCapacite)) {
-        alert(`La capacité ${capaciteNom} a été ajoutée avec succès.`)
-        updateCapacitesList()
-        updateCapacitesOptions()
-        this.reset()
-      } else {
-        alert("Une erreur s'est produite lors de l'ajout de la capacité.")
-      }
-    }
-  })
-
-  // Export des capacités
-  document.getElementById("export-capacites").addEventListener("click", () => {
-    const capacites = Database.getCapacites()
-    const jsonBlob = new Blob([JSON.stringify(capacites, null, 2)], { type: "application/json" })
-    const url = URL.createObjectURL(jsonBlob)
-
-    const a = document.createElement("a")
-    a.href = url
-    a.download = "beyond-the-curse-capacites.json"
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  })
-
-  // Import des capacités
-  document.getElementById("import-capacites").addEventListener("click", () => {
-    const fileInput = document.getElementById("import-capacites-file")
-    if (fileInput.files.length === 0) {
-      alert("Veuillez sélectionner un fichier JSON.")
-      return
-    }
-
-    const file = fileInput.files[0]
-    const reader = new FileReader()
-
-    reader.onload = (e) => {
-      try {
-        const capacitesData = JSON.parse(e.target.result)
-        if (Database.importCapacites(capacitesData)) {
-          alert("Capacités importées avec succès.")
-          updateCapacitesList()
-          updateCapacitesOptions()
-        } else {
-          alert("Erreur lors de l'importation des capacités.")
-        }
-      } catch (error) {
-        alert("Erreur de format JSON: " + error.message)
-      }
-    }
-
-    reader.readAsText(file)
-  })
-
   // Gestion des paliers
 
   // Sélection d'un palier
@@ -1048,12 +1118,13 @@ document.addEventListener("DOMContentLoaded", () => {
           description: document.getElementById("palier-description").value || "",
         }
 
-        if (Database.updatePalier(selectedPalier, updatedPalier)) {
+        const result = Database.updatePalier(selectedPalier, updatedPalier)
+        if (result.success) {
           alert(`Le palier ${updatedPalier.niveau} a été mis à jour.`)
           updatePaliersList()
           updatePaliersOptions()
         } else {
-          alert("Une erreur s'est produite lors de la mise à jour du palier.")
+          alert(result.message || "Une erreur s'est produite lors de la mise à jour du palier.")
         }
       }
     } else {
@@ -1096,26 +1167,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const palierNiveau = Number.parseInt(document.getElementById("new-palier-niveau").value)
 
     if (palierId && palierNiveau) {
-      // Vérifier si l'ID existe déjà
-      if (Database.getPalier(palierId)) {
-        alert(`Un palier avec l'ID "${palierId}" existe déjà. Veuillez choisir un autre ID.`)
-        return
-      }
-
       const newPalier = {
         id: palierId,
         niveau: palierNiveau,
         pv: Number.parseInt(document.getElementById("new-palier-pv").value) || 100,
-        description: document.getElementById("new-palier-description").value || `Palier ${palierNiveau}, le joueur a ${document.getElementById("new-palier-pv").value || 100} PV.`,
+        description:
+          document.getElementById("new-palier-description").value ||
+          `Palier ${palierNiveau}, le joueur a ${document.getElementById("new-palier-pv").value || 100} PV.`,
       }
 
-      if (Database.addPalier(palierId, newPalier)) {
+      const result = Database.addPalier(palierId, newPalier)
+      if (result.success) {
         alert(`Le palier ${palierNiveau} a été ajouté avec succès.`)
         updatePaliersList()
         updatePaliersOptions()
         this.reset()
       } else {
-        alert("Une erreur s'est produite lors de l'ajout du palier.")
+        alert(result.message || "Une erreur s'est produite lors de l'ajout du palier.")
       }
     }
   })
@@ -1163,6 +1231,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reader.readAsText(file)
   })
+
+  // Mise à jour des listes complètes
+  function updateListesPage() {
+    // Mise à jour liste des fruits
+    const fruits = Database.getFruits()
+    const fruitsBody = document.getElementById("liste-fruits-body")
+    fruitsBody.innerHTML = ""
+
+    for (const id in fruits) {
+      const fruit = fruits[id]
+      const row = document.createElement("tr")
+      row.innerHTML = `
+        <td>${fruit.id}</td>
+        <td>${fruit.name}</td>
+        <td>${fruit.description || ""}</td>
+        <td>${fruit.degats || 0}</td>
+        <td>${fruit.debuff || 0}</td>
+        <td>${fruit.buff || 0}</td>
+        <td>${fruit.heal || 0}</td>
+        <td>${fruit.pv || 0}</td>
+      `
+      fruitsBody.appendChild(row)
+    }
+
+    // Mise à jour liste des races
+    const races = Database.getRaces()
+    const racesBody = document.getElementById("liste-races-body")
+    racesBody.innerHTML = ""
+
+    for (const id in races) {
+      const race = races[id]
+      const row = document.createElement("tr")
+      row.innerHTML = `
+        <td>${race.id}</td>
+        <td>${race.name}</td>
+        <td>${race.description || ""}</td>
+        <td>${race.degats || 0}</td>
+        <td>${race.debuff || 0}</td>
+        <td>${race.buff || 0}</td>
+        <td>${race.heal || 0}</td>
+      `
+      racesBody.appendChild(row)
+    }
+
+    // Mise à jour liste des classes
+    const classes = Database.getClasses()
+    const classesBody = document.getElementById("liste-classes-body")
+    classesBody.innerHTML = ""
+
+    for (const id in classes) {
+      const classe = classes[id]
+      const row = document.createElement("tr")
+      row.innerHTML = `
+        <td>${classe.id}</td>
+        <td>${classe.name}</td>
+        <td>${classe.description || ""}</td>
+        <td>${classe.degats || 0}</td>
+        <td>${classe.debuff || 0}</td>
+        <td>${classe.buff || 0}</td>
+        <td>${classe.heal || 0}</td>
+      `
+      classesBody.appendChild(row)
+    }
+  }
 })
 
 // Fonctions utilitaires
@@ -1170,20 +1302,18 @@ document.addEventListener("DOMContentLoaded", () => {
 // Mettre à jour l'interface utilisateur avec les données de la base de données
 function updateUI() {
   updateFruitOptions()
+  updateRaceOptions()
+  updateClasseOptions()
+  updatePaliersOptions()
+
   updateFruitDisplay()
   updateCombatHistory()
-  updateCapacitesOptions()
-  updatePaliersOptions()
   updatePaliersList()
+  updateListesPage()
 
   // Mettre à jour le JSON dans l'éditeur
   if (document.getElementById("modif-stats").classList.contains("active")) {
     document.getElementById("database-json").value = Database.export()
-  }
-
-  // Mettre à jour la liste des capacités
-  if (document.getElementById("modif-capacites").classList.contains("active")) {
-    updateCapacitesList()
   }
 }
 
@@ -1194,6 +1324,7 @@ function updateFruitOptions() {
 
   fruitSelects.forEach((selectId) => {
     const select = document.getElementById(selectId)
+    if (!select) return
 
     // Vider le select sauf la première option
     while (select.options.length > 1) {
@@ -1211,10 +1342,62 @@ function updateFruitOptions() {
   })
 }
 
+// Mettre à jour les options de sélection des races
+function updateRaceOptions() {
+  const races = Database.getRaces()
+  const raceSelects = ["p1-race", "p2-race", "race-select"]
+
+  raceSelects.forEach((selectId) => {
+    const select = document.getElementById(selectId)
+    if (!select) return
+
+    // Vider le select sauf la première option
+    while (select.options.length > 1) {
+      select.remove(1)
+    }
+
+    // Ajouter les options de races
+    for (const id in races) {
+      const race = races[id]
+      const option = document.createElement("option")
+      option.value = id
+      option.textContent = race.name
+      select.appendChild(option)
+    }
+  })
+}
+
+// Mettre à jour les options de sélection des classes
+function updateClasseOptions() {
+  const classes = Database.getClasses()
+  const classeSelects = ["p1-classe", "p2-classe", "classe-select"]
+
+  classeSelects.forEach((selectId) => {
+    const select = document.getElementById(selectId)
+    if (!select) return
+
+    // Vider le select sauf la première option
+    while (select.options.length > 1) {
+      select.remove(1)
+    }
+
+    // Ajouter les options de classes
+    for (const id in classes) {
+      const classe = classes[id]
+      const option = document.createElement("option")
+      option.value = id
+      option.textContent = classe.name
+      select.appendChild(option)
+    }
+  })
+}
+
 // Mettre à jour l'affichage des fruits
 function updateFruitDisplay() {
   const fruits = Database.getFruits()
   const fruitContainer = document.getElementById("fruits-container")
+  if (!fruitContainer) return
+
   let fruitHTML = ""
 
   for (const id in fruits) {
@@ -1227,11 +1410,11 @@ function updateFruitDisplay() {
                     <div class="mt-3">
                         <strong>Statistiques de base:</strong>
                         <ul class="list-unstyled mt-2">
-                            <li>Dégâts/min: ${fruit.degats}</li>
-                            <li>Debuff Entités: ${fruit.debuff}</li>
-                            <li>Buff Utilisateur: ${fruit.buff}</li>
-                            <li>Heal Utilisateur: ${fruit.heal}</li>
-                            <li>PV MAX (Palier 1): ${fruit.pv}</li>
+                            <li>Dégâts/min: ${fruit.degats || 0}</li>
+                            <li>Debuff Entités: ${fruit.debuff || 0}</li>
+                            <li>Buff Utilisateur: ${fruit.buff || 0}</li>
+                            <li>Heal Utilisateur: ${fruit.heal || 0}</li>
+                            <li>PV MAX (Palier 1): ${fruit.pv || 0}</li>
                         </ul>
                     </div>
                 </div>
@@ -1246,6 +1429,7 @@ function updateFruitDisplay() {
 function updateCombatHistory() {
   const history = Database.getHistory()
   const historyList = document.getElementById("combat-history-list")
+  if (!historyList) return
 
   if (history.length === 0) {
     historyList.innerHTML = `
@@ -1301,80 +1485,13 @@ function updateCombatHistory() {
   historyList.innerHTML = historyHTML
 }
 
-// Mettre à jour la liste des capacités
-function updateCapacitesList() {
-  const capacites = Database.getCapacites()
-  const capacitesList = document.getElementById("capacites-list")
-  const capaciteSelect = document.getElementById("capacite-select")
-
-  // Vider la liste des capacités
-  capacitesList.innerHTML = ""
-
-  // Vider le select sauf la première option
-  while (capaciteSelect.options.length > 1) {
-    capaciteSelect.remove(1)
-  }
-
-  // Ajouter les capacités à la liste et au select
-  for (const id in capacites) {
-    const capacite = capacites[id]
-
-    // Ajouter à la liste
-    const row = document.createElement("tr")
-    row.innerHTML = `
-            <td>${capacite.id}</td>
-            <td>${capacite.type}</td>
-            <td>${capacite.niveau}</td>
-            <td>${capacite.nom}</td>
-            <td>${capacite.description || ""}</td>
-        `
-    capacitesList.appendChild(row)
-
-    // Ajouter au select
-    const option = document.createElement("option")
-    option.value = id
-    option.textContent = `${capacite.nom} (${capacite.type}, Niveau ${capacite.niveau})`
-    capaciteSelect.appendChild(option)
-  }
-}
-
-// Mettre à jour les options de sélection des capacités
-function updateCapacitesOptions() {
-  const capacites = Database.getCapacites()
-  const capTypes = ["cap0", "cap1", "cap2", "cap3", "cap4", "cap5"]
-
-  // Pour chaque type de capacité
-  capTypes.forEach((type) => {
-    // Sélectionner tous les selects pour ce type (p1 et p2)
-    const selects = [document.getElementById(`p1-${type}`), document.getElementById(`p2-${type}`)]
-
-    selects.forEach((select) => {
-      if (select) {
-        // Vider le select sauf la première option
-        while (select.options.length > 1) {
-          select.remove(1)
-        }
-
-        // Filtrer les capacités par type
-        for (const id in capacites) {
-          const capacite = capacites[id]
-          if (capacite.type === type) {
-            const option = document.createElement("option")
-            option.value = id
-            option.textContent = `${capacite.nom} (Niveau ${capacite.niveau})`
-            select.appendChild(option)
-          }
-        }
-      }
-    })
-  })
-}
-
-// Mettre à jour la liste des paliers
+// Mettre à jour la liste des paliers dans le gestionnaire de paliers
 function updatePaliersList() {
   const paliers = Database.getPaliers()
   const paliersList = document.getElementById("paliers-list")
   const palierSelect = document.getElementById("palier-select")
+
+  if (!paliersList || !palierSelect) return
 
   // Vider la liste des paliers
   paliersList.innerHTML = ""
@@ -1384,7 +1501,6 @@ function updatePaliersList() {
     palierSelect.remove(1)
   }
 
-  // Ajouter les paliers à la liste et au select
   // Trier les paliers par niveau
   const paliersArray = Object.values(paliers).sort((a, b) => a.niveau - b.niveau)
 
@@ -1414,23 +1530,92 @@ function updatePaliersOptions() {
 
   palierSelects.forEach((selectId) => {
     const select = document.getElementById(selectId)
+    if (!select) return
 
-    if (select) {
-      // Vider le select sauf la première option
-      while (select.options.length > 1) {
-        select.remove(1)
-      }
-
-      // Trier les paliers par niveau
-      const paliersArray = Object.values(paliers).sort((a, b) => a.niveau - b.niveau)
-
-      // Ajouter les options de paliers
-      paliersArray.forEach((palier) => {
-        const option = document.createElement("option")
-        option.value = palier.niveau
-        option.textContent = `Palier ${palier.niveau} (${palier.pv} PV)`
-        select.appendChild(option)
-      })
+    // Vider le select sauf la première option
+    while (select.options.length > 1) {
+      select.remove(1)
     }
+
+    // Trier les paliers par niveau
+    const paliersArray = Object.values(paliers).sort((a, b) => a.niveau - b.niveau)
+
+    // Ajouter les options de paliers
+    paliersArray.forEach((palier) => {
+      const option = document.createElement("option")
+      option.value = palier.niveau
+      option.textContent = `Palier ${palier.niveau} (${palier.pv} PV)`
+      select.appendChild(option)
+    })
   })
+}
+
+// Mettre à jour les listes complètes (onglet "Listes")
+function updateListesPage() {
+  // Mise à jour liste des fruits
+  const fruitsBody = document.getElementById("liste-fruits-body")
+  if (fruitsBody) {
+    const fruits = Database.getFruits()
+    fruitsBody.innerHTML = ""
+
+    for (const id in fruits) {
+      const fruit = fruits[id]
+      const row = document.createElement("tr")
+      row.innerHTML = `
+        <td>${fruit.id}</td>
+        <td>${fruit.name}</td>
+        <td>${fruit.description || ""}</td>
+        <td>${fruit.degats || 0}</td>
+        <td>${fruit.debuff || 0}</td>
+        <td>${fruit.buff || 0}</td>
+        <td>${fruit.heal || 0}</td>
+        <td>${fruit.pv || 0}</td>
+      `
+      fruitsBody.appendChild(row)
+    }
+  }
+
+  // Mise à jour liste des races
+  const racesBody = document.getElementById("liste-races-body")
+  if (racesBody) {
+    const races = Database.getRaces()
+    racesBody.innerHTML = ""
+
+    for (const id in races) {
+      const race = races[id]
+      const row = document.createElement("tr")
+      row.innerHTML = `
+        <td>${race.id}</td>
+        <td>${race.name}</td>
+        <td>${race.description || ""}</td>
+        <td>${race.degats || 0}</td>
+        <td>${race.debuff || 0}</td>
+        <td>${race.buff || 0}</td>
+        <td>${race.heal || 0}</td>
+      `
+      racesBody.appendChild(row)
+    }
+  }
+
+  // Mise à jour liste des classes
+  const classesBody = document.getElementById("liste-classes-body")
+  if (classesBody) {
+    const classes = Database.getClasses()
+    classesBody.innerHTML = ""
+
+    for (const id in classes) {
+      const classe = classes[id]
+      const row = document.createElement("tr")
+      row.innerHTML = `
+        <td>${classe.id}</td>
+        <td>${classe.name}</td>
+        <td>${classe.description || ""}</td>
+        <td>${classe.degats || 0}</td>
+        <td>${classe.debuff || 0}</td>
+        <td>${classe.buff || 0}</td>
+        <td>${classe.heal || 0}</td>
+      `
+      classesBody.appendChild(row)
+    }
+  }
 }
