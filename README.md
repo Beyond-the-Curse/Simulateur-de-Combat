@@ -1,11 +1,23 @@
 
 # ⚔️ Simulateur-de-Combat | Beyond the Curse
+  
 
-![Statut du projet](https://img.shields.io/badge/Statut-En%20développement-orange)
-![Support Navigateur](https://img.shields.io/badge/Navigateur-Tous-green)
-![Technologie](https://img.shields.io/badge/HTML%2FJS-Bootstrap%205-blue)
+
 
 > Simulateur web interactif pour comparer et analyser les effets de fruits du démon, classes, races et items dans un environnement de combat RPG.
+
+<!-- SVG animation pour style dynamique -->
+<p align="center">
+  <img src="./battle.gif" alt="Sword animation" height="80"/>
+</p>
+
+<div align="center">
+
+  ![Statut du projet](https://img.shields.io/badge/Statut-En%20développement-orange)
+  ![Support Navigateur](https://img.shields.io/badge/Navigateur-Tous-green)
+  ![Technologie](https://img.shields.io/badge/HTML%2FJS-Bootstrap%205-blue)
+
+</div>
 
 <details>
 <summary>📁 <strong>Structure du Projet</strong></summary>
@@ -84,5 +96,6 @@ index.html             # Interface utilisateur principale
 
 <!-- SVG animation pour style dynamique -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/broadsword.svg" alt="Sword SVG" height="80"/>
+  <img src="./battle.gif" alt="Sword animation" height="80"/>
 </p>
+
