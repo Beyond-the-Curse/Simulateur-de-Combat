@@ -88,7 +88,8 @@ index.html             # Interface utilisateur principale
 <details>
 <summary>👨‍💻 <strong>Auteur</strong></summary>
 
-- Projet conçu par **_ImDarling_**
+- Dirigé par ```insupp0rtable```
+- Projet conçu par ```_ImDarling_```
 
 </details>
 
