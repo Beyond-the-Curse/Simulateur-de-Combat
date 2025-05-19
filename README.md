@@ -78,8 +78,9 @@ index.html             # Interface utilisateur principale
 ### Lancer le projet
 
 1. Connectez-vous via **Tailscale**.
-2. Accédez à l'URL fournie (ex: `http://100.x.x.x:xxxx`).
-3. Aucun build, aucune commande.
+2. Connecter vous au serveur [srv-btc](https://login.tailscale.com/admin/invite/cU795bUdjYM6j5YFEaYd11)
+3. Accédez à l'URL fournie (ex: `http://100.x.x.x:xxxx`).
+4. Aucun build, aucune commande.
 
 </details>
 
