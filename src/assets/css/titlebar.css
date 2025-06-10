@@ -1,0 +1,85 @@
+/* Custom Titlebar Styles */
+.titlebar {
+  position: fixed; /* Ajouté pour fixer en haut */
+  top: 0; /* Ajouté pour positionner en haut */
+  left: 0; /* Ajouté pour couvrir toute la largeur */
+  right: 0; /* Ajouté pour couvrir toute la largeur */
+  width: 100%; /* Ajouté pour assurer la largeur complète */
+  z-index: 10000; /* Ajouté pour rester au-dessus de tout */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 32px;
+  background: var(--secondary-color);
+  color: var(--text-primary);
+  padding: 0 1rem;
+  -webkit-app-region: drag;
+  border-bottom: 1px solid var(--border-color);
+  user-select: none;
+  box-sizing: border-box; /* Ajouté pour inclure le padding dans la largeur */
+}
+
+
+.titlebar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.titlebar-logo {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  border-radius: 3px;
+}
+
+.titlebar-controls {
+  display: flex;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 12px;
+}
+
+.titlebar-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.titlebar-btn.close:hover {
+  background: var(--error-color);
+  color: white;
+}
+
+.titlebar-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.main-content {
+  margin-top: 32px; /* Décalage pour éviter que le contenu passe sous la titlebar */
+  height: calc(100vh - 32px); /* Hauteur du contenu = hauteur de la fenêtre - hauteur de la titlebar */
+  overflow-y: auto; /* Permet le défilement du contenu principal */
+  box-sizing: border-box;
+}
+
+/* Ajouté pour éviter que le body ait un scroll */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Empêche le défilement du body */
+  height: 100vh;
+}

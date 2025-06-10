@@ -1,16 +1,18 @@
-// Easter Egg - BTC Key Sequence
+// Easter Egg - Key Sequences
 document.addEventListener("DOMContentLoaded", () => {
-  // Variables pour suivre la séquence de touches
+  // Variables pour suivre les séquences de touches
   let keySequence = []
-  const targetSequence = ["b", "t", "c"]
+  const btcSequence = ["b", "d", "p"]
+  const darlingSequence = ["d", "a", "r", "l", "i", "n", "g"]
   let animationActive = false
 
-  // Créer l'élément audio à l'avance
+  // Créer les éléments audio à l'avance
   const btcAudio = new Audio("assets/audio/btc.mp3")
+  const idAudio = new Audio("assets/audio/ID.mp3")
 
-  // Créer le conteneur pour l'animation du logo
-  const easterEggContainer = document.createElement("div")
-  easterEggContainer.style.cssText = `
+  // Créer le conteneur pour l'animation du logo BTC
+  const btcContainer = document.createElement("div")
+  btcContainer.style.cssText = `
     position: fixed;
     top: 0;
     left: 0;
@@ -25,20 +27,52 @@ document.addEventListener("DOMContentLoaded", () => {
     pointer-events: none;
     transition: opacity 0.5s ease;
   `
-  document.body.appendChild(easterEggContainer)
+  document.body.appendChild(btcContainer)
 
-  // Créer l'élément image du logo
-  const logoImg = document.createElement("img")
-  logoImg.src = "assets/img/logo.png"
-  logoImg.alt = "Beyond The Curse"
-  logoImg.style.cssText = `
+  // Créer l'élément image du logo BTC
+  const btcLogo = document.createElement("img")
+  btcLogo.src = "assets/img/logo.png"
+  btcLogo.alt = "Beyond The Curse"
+  btcLogo.style.cssText = `
     max-width: 80%;
     max-height: 80%;
     transform: scale(0.1);
     opacity: 0;
     transition: transform 1s ease, opacity 1s ease;
   `
-  easterEggContainer.appendChild(logoImg)
+  btcContainer.appendChild(btcLogo)
+
+  // Créer le conteneur pour l'animation Darling
+  const darlingContainer = document.createElement("div")
+  darlingContainer.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  `
+  document.body.appendChild(darlingContainer)
+
+  // Créer l'élément image pour Darling
+  const idLogo = document.createElement("img")
+  idLogo.src = "assets/img/ID.png"
+  idLogo.alt = "Darling"
+  idLogo.style.cssText = `
+    max-width: 80%;
+    max-height: 80%;
+    transform: scale(0.1) rotate(-10deg);
+    opacity: 0;
+    transition: transform 1.2s ease, opacity 1.2s ease, rotate 1.5s ease;
+  `
+  darlingContainer.appendChild(idLogo)
 
   // Écouteur d'événement pour les touches
   document.addEventListener("keydown", (event) => {
@@ -49,28 +83,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const key = event.key.toLowerCase()
     keySequence.push(key)
 
-    // Ne garder que les 3 dernières touches
-    if (keySequence.length > 3) {
+    // Limiter la taille de la séquence
+    if (keySequence.length > 10) {
       keySequence.shift()
     }
 
-    // Vérifier si la séquence correspond
-    if (arraysEqual(keySequence, targetSequence)) {
-      triggerEasterEgg()
+    // Vérifier si la séquence BTC correspond
+    if (endsWithSequence(keySequence, btcSequence)) {
+      triggerBtcEasterEgg()
+    }
+
+    // Vérifier si la séquence DARLING correspond
+    if (endsWithSequence(keySequence, darlingSequence)) {
+      triggerDarlingEasterEgg()
     }
   })
 
-  // Fonction pour vérifier si deux tableaux sont égaux
-  function arraysEqual(arr1, arr2) {
-    if (arr1.length !== arr2.length) return false
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) return false
+  // Fonction pour vérifier si un tableau se termine par une séquence
+  function endsWithSequence(arr, sequence) {
+    if (arr.length < sequence.length) return false
+
+    const startIndex = arr.length - sequence.length
+    for (let i = 0; i < sequence.length; i++) {
+      if (arr[startIndex + i] !== sequence[i]) return false
     }
     return true
   }
 
-  // Fonction pour déclencher l'Easter Egg
-  function triggerEasterEgg() {
+  // Fonction pour déclencher l'Easter Egg BTC
+  function triggerBtcEasterEgg() {
     // Éviter les déclenchements multiples
     if (animationActive) return
     animationActive = true
@@ -79,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     keySequence = []
 
     // Afficher le conteneur
-    easterEggContainer.style.opacity = "1"
+    btcContainer.style.opacity = "1"
 
     // Jouer le son
     btcAudio.currentTime = 0
@@ -87,21 +128,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Animation du logo
     setTimeout(() => {
-      logoImg.style.transform = "scale(1)"
-      logoImg.style.opacity = "1"
+      btcLogo.style.transform = "scale(1)"
+      btcLogo.style.opacity = "1"
     }, 100)
 
-    // Masquer après 8 secondes (pour une durée totale de ~10 secondes avec les transitions)
+    // Masquer après 5 secondes
     setTimeout(() => {
-      logoImg.style.transform = "scale(1.5)"
-      logoImg.style.opacity = "0"
+      btcLogo.style.transform = "scale(1.5)"
+      btcLogo.style.opacity = "0"
 
       setTimeout(() => {
-        easterEggContainer.style.opacity = "0"
+        btcContainer.style.opacity = "0"
 
         // Réinitialiser après la fin de l'animation
         setTimeout(() => {
-          logoImg.style.transform = "scale(0.1)"
+          btcLogo.style.transform = "scale(0.1)"
+          animationActive = false
+        }, 500)
+      }, 1000)
+    }, 5000)
+  }
+
+  // Fonction pour déclencher l'Easter Egg Darling
+  function triggerDarlingEasterEgg() {
+    // Éviter les déclenchements multiples
+    if (animationActive) return
+    animationActive = true
+
+    // Réinitialiser la séquence
+    keySequence = []
+
+    // Afficher le conteneur
+    darlingContainer.style.opacity = "1"
+
+    // Jouer le son
+    idAudio.currentTime = 0
+    idAudio.play()
+
+    // Animation du logo avec rotation
+    setTimeout(() => {
+      idLogo.style.transform = "scale(1) rotate(0deg)"
+      idLogo.style.opacity = "1"
+    }, 100)
+
+    // Animation supplémentaire pendant l'affichage
+    setTimeout(() => {
+      idLogo.style.transform = "scale(1.1) rotate(5deg)"
+
+      setTimeout(() => {
+        idLogo.style.transform = "scale(1) rotate(-5deg)"
+
+        setTimeout(() => {
+          idLogo.style.transform = "scale(1.05) rotate(0deg)"
+        }, 700)
+      }, 700)
+    }, 1500)
+
+    // Masquer après 5 secondes
+    setTimeout(() => {
+      idLogo.style.transform = "scale(1.5) rotate(10deg)"
+      idLogo.style.opacity = "0"
+
+      setTimeout(() => {
+        darlingContainer.style.opacity = "0"
+
+        // Réinitialiser après la fin de l'animation
+        setTimeout(() => {
+          idLogo.style.transform = "scale(0.1) rotate(-10deg)"
           animationActive = false
         }, 500)
       }, 1000)

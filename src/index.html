@@ -1,697 +1,1315 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beyond The Curse</title>
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom CSS -->
-<link href="assets/css/style.css" rel="stylesheet">
-</head>
-<body>
-<!-- Header -->
-<header class="header">
-    <div class="container-fluid">
-        <div class="row align-items-center">
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond The Curse</title>
+    <link rel="icon" href="assets/img/logo.png" type="image/x-icon" />
+    <link href="assets/css/titlebar.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/responsive-fixes.css" rel="stylesheet" />
+    <style>
+      .titlebar {
+        flex-shrink: 0;
+        background: var(--surface-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Désactive le glisser-déposer */
+      * {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+      }
+
+      *::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="titlebar">
+      <div class="titlebar-title">
+        <img
+          src="assets/img/icon_256.png"
+          alt="Logo"
+          style="width: 20px; height: 20px; margin-right: 10px"
+        />
+        BTC Launcher
+      </div>
+      <div class="titlebar-controls">
+        <button class="titlebar-btn" id="minimize-btn">−</button>
+        <button class="titlebar-btn" id="maximize-btn">□</button>
+        <button class="titlebar-btn close" id="close-btn">×</button>
+      </div>
+    </div>
+    <!-- Header -->
+    <div class="main-content">
+      <header class="header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
             <div class="col-auto">
-                <img src="assets/img/logo.png" alt="Beyond the Curse" class="logo">
+              <img
+                src="assets/img/logo.png"
+                alt="Beyond the Curse"
+                class="logo"
+              />
             </div>
             <div class="col">
-                <div class="d-flex gap-4">
-                    <button class="btn active" data-page="statistique-combat">Statistique combat</button>
-                    <button class="btn" data-page="historique-combat">Historique de combat</button>
-                    <button class="btn" data-page="fruit-du-demon">Fruit du démon</button>
-                    <button class="btn" data-page="modif-stats">Modification Statistiques</button>
-                    <button class="btn" data-page="modif-paliers">Modif paliers</button>
-                    <button class="btn" data-page="listes">Listes</button>
-                </div>
+              <div class="d-flex gap-4">
+                <button class="btn active" data-page="statistique-combat">
+                  Statistique combat
+                </button>
+                <button class="btn" data-page="historique-combat">
+                  Historique de combat
+                </button>
+                <button class="btn" data-page="fruit-du-demon">
+                  Fruit du démon
+                </button>
+                <button class="btn" data-page="modif-stats">
+                  Modification Statistiques
+                </button>
+                <button class="btn" data-page="modif-paliers">
+                  Modif paliers
+                </button>
+                <button class="btn" data-page="listes">Listes</button>
+              </div>
             </div>
+            <div class="col-auto">
+              <div class="theme-toggle-wrapper">
+                <label class="theme-toggle" for="theme-toggle-checkbox">
+                  <input type="checkbox" id="theme-toggle-checkbox" />
+                  <div class="slider round">
+                    <span class="toggle-icon light">☀️</span>
+                    <span class="toggle-icon dark">🌙</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</header>
+      </header>
 
-<!-- Main Content -->
-<main class="flex-grow-1 d-flex flex-column">
-    <!-- Statistique Combat Page -->
-    <div id="statistique-combat" class="page active">
-        <!-- Player Forms -->
-        <div class="d-flex border-bottom">
+      <!-- Main Content -->
+      <main class="flex-grow-1 d-flex flex-column">
+        <!-- Statistique Combat Page -->
+        <div id="statistique-combat" class="page active">
+          <!-- Player Forms -->
+          <div class="d-flex border-bottom">
             <!-- P1 Section -->
             <div class="player-section col-6 border-end">
-                <h2>P1</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <label for="p1-fdd">FDD :</label>
-                        <select id="p1-fdd" class="form-select">
-                            <option selected disabled>Sélectionner FDD</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="p1-race">Race :</label>
-                        <select id="p1-race" class="form-select">
-                            <option selected disabled>Sélectionner Race</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="p1-classe">Classe :</label>
-                        <select id="p1-classe" class="form-select">
-                            <option selected disabled>Sélectionner Classe</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-nom">Nom :</label>
-                        <input type="text" id="p1-nom" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-palier">Palier :</label>
-                        <select id="p1-palier" class="form-select">
-                            <option selected disabled>Sélectionner Palier</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-description">Description :</label>
-                        <input type="text" id="p1-description" class="form-control">
-                    </div>
-                    
-                    <!-- Statistiques -->
-                    <div class="col-md-6">
-                        <label for="p1-degats">Dégâts/min :</label>
-                        <input type="number" id="p1-degats" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-debuff">Debuff Entités :</label>
-                        <input type="number" id="p1-debuff" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-buff">Buff Utilisateur :</label>
-                        <input type="number" id="p1-buff" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-heal-user">Heal Utilisateur /min :</label>
-                        <input type="number" id="p1-heal-user" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-heal-entities">Heal Entités /min :</label>
-                        <input type="number" id="p1-heal-entities" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p1-pv-max">PV MAX :</label>
-                        <input type="number" id="p1-pv-max" class="form-control" min="0" readonly>
-                    </div>
+              <h2>Joueur 1</h2>
+              <div class="row g-4">
+                <div class="col-md-4">
+                  <label for="p1-fdd">FDD :</label>
+                  <select id="p1-fdd" class="form-select">
+                    <option selected disabled>Sélectionner FDD</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
                 </div>
+                <div class="col-md-4">
+                  <label for="p1-race">Race :</label>
+                  <select id="p1-race" class="form-select">
+                    <option selected disabled>Sélectionner Race</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="p1-classe">Classe :</label>
+                  <select id="p1-classe" class="form-select">
+                    <option selected disabled>Sélectionner Classe</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-nom">Nom :</label>
+                  <input
+                    type="text"
+                    id="p1-nom"
+                    class="form-control"
+                    placeholder="Joueur 1"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-palier">Palier :</label>
+                  <select id="p1-palier" class="form-select">
+                    <option selected disabled>Sélectionner Palier</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-description">Description :</label>
+                  <input
+                    type="text"
+                    id="p1-description"
+                    class="form-control"
+                    placeholder="Description"
+                  />
+                </div>
+
+                <!-- Statistiques -->
+                <div class="col-md-6">
+                  <label for="p1-degats">Dégâts/min :</label>
+                  <input
+                    type="number"
+                    id="p1-degats"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-debuff">Debuff Entités :</label>
+                  <input
+                    type="number"
+                    id="p1-debuff"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-buff">Buff Utilisateur :</label>
+                  <input
+                    type="number"
+                    id="p1-buff"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-heal-user">Heal Utilisateur /min :</label>
+                  <input
+                    type="number"
+                    id="p1-heal-user"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-heal-entities">Heal Entités /min :</label>
+                  <input
+                    type="number"
+                    id="p1-heal-entities"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p1-pv-max">PV MAX :</label>
+                  <input
+                    type="number"
+                    id="p1-pv-max"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+              </div>
             </div>
 
             <!-- P2 Section -->
             <div class="player-section col-6">
-                <h2>P2</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <label for="p2-fdd">FDD :</label>
-                        <select id="p2-fdd" class="form-select">
-                            <option selected disabled>Sélectionner FDD</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="p2-race">Race :</label>
-                        <select id="p2-race" class="form-select">
-                            <option selected disabled>Sélectionner Race</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="p2-classe">Classe :</label>
-                        <select id="p2-classe" class="form-select">
-                            <option selected disabled>Sélectionner Classe</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-nom">Nom :</label>
-                        <input type="text" id="p2-nom" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-palier">Palier :</label>
-                        <select id="p2-palier" class="form-select">
-                            <option selected disabled>Sélectionner Palier</option>
-                            <!-- Options ajoutées dynamiquement -->
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-description">Description :</label>
-                        <input type="text" id="p2-description" class="form-control">
-                    </div>
-                    
-                    <!-- Statistiques -->
-                    <div class="col-md-6">
-                        <label for="p2-degats">Dégâts/min :</label>
-                        <input type="number" id="p2-degats" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-debuff">Debuff Entités :</label>
-                        <input type="number" id="p2-debuff" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-buff">Buff Utilisateur :</label>
-                        <input type="number" id="p2-buff" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-heal-user">Heal Utilisateur /min :</label>
-                        <input type="number" id="p2-heal-user" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-heal-entities">Heal Entités /min :</label>
-                        <input type="number" id="p2-heal-entities" class="form-control" min="0" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="p2-pv-max">PV MAX :</label>
-                        <input type="number" id="p2-pv-max" class="form-control" min="0" readonly>
-                    </div>
+              <h2>Joueur 2</h2>
+              <div class="row g-4">
+                <div class="col-md-4">
+                  <label for="p2-fdd">FDD :</label>
+                  <select id="p2-fdd" class="form-select">
+                    <option selected disabled>Sélectionner FDD</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
                 </div>
-            </div>
-        </div>
+                <div class="col-md-4">
+                  <label for="p2-race">Race :</label>
+                  <select id="p2-race" class="form-select">
+                    <option selected disabled>Sélectionner Race</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="p2-classe">Classe :</label>
+                  <select id="p2-classe" class="form-select">
+                    <option selected disabled>Sélectionner Classe</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-nom">Nom :</label>
+                  <input
+                    type="text"
+                    id="p2-nom"
+                    class="form-control"
+                    placeholder="Joueur 2"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-palier">Palier :</label>
+                  <select id="p2-palier" class="form-select">
+                    <option selected disabled>Sélectionner Palier</option>
+                    <!-- Options ajoutées dynamiquement -->
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-description">Description :</label>
+                  <input
+                    type="text"
+                    id="p2-description"
+                    class="form-control"
+                    placeholder="Description"
+                  />
+                </div>
 
-        <!-- Combat Section -->
-        <div class="combat-section">
+                <!-- Statistiques -->
+                <div class="col-md-6">
+                  <label for="p2-degats">Dégâts/min :</label>
+                  <input
+                    type="number"
+                    id="p2-degats"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-debuff">Debuff Entités :</label>
+                  <input
+                    type="number"
+                    id="p2-debuff"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-buff">Buff Utilisateur :</label>
+                  <input
+                    type="number"
+                    id="p2-buff"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-heal-user">Heal Utilisateur /min :</label>
+                  <input
+                    type="number"
+                    id="p2-heal-user"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-heal-entities">Heal Entités /min :</label>
+                  <input
+                    type="number"
+                    id="p2-heal-entities"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="p2-pv-max">PV MAX :</label>
+                  <input
+                    type="number"
+                    id="p2-pv-max"
+                    class="form-control"
+                    min="0"
+                    readonly
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Combat Section -->
+          <div class="combat-section">
             <button class="btn combat-btn" id="combat-btn">Combat</button>
             <div id="combat-results" class="h-100 w-100">
-                <!-- Combat results will appear here -->
+              <!-- Combat results will appear here -->
             </div>
+          </div>
         </div>
-    </div>
 
-    <!-- Historique de Combat Page -->
-    <div id="historique-combat" class="page">
-        <div class="container py-5">
+        <!-- Historique de Combat Page -->
+        <div id="historique-combat" class="page">
+          <div class="container py-5">
             <h2 class="mb-4">Historique des Combats</h2>
             <div id="combat-history-list">
-                <!-- Les combats seront ajoutés ici dynamiquement -->
-                <div class="alert alert-info">
-                    Aucun combat n'a encore été enregistré.
-                </div>
+              <!-- Les combats seront ajoutés ici dynamiquement -->
+              <div class="alert alert-info">
+                Aucun combat n'a encore été enregistré.
+              </div>
             </div>
-            
-            <div class="json-control">
-                <h4>Gestion de l'historique</h4>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <button id="export-history" class="btn btn-purple">Exporter l'historique (JSON)</button>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="import-history-file" accept=".json">
-                            <button class="btn btn-purple" id="import-history">Importer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Fruit du Démon Page -->
-    <div id="fruit-du-demon" class="page">
-        <div class="container py-5">
+            <div class="json-control">
+              <h4>Gestion de l'historique</h4>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <button id="export-history" class="btn btn-purple">
+                    Exporter l'historique (JSON)
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="import-history-file"
+                      accept=".json"
+                    />
+                    <button class="btn btn-purple" id="import-history">
+                      Importer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fruit du Démon Page -->
+        <div id="fruit-du-demon" class="page">
+          <div class="container py-5">
             <h2 class="mb-4">Fruits du Démon</h2>
             <div id="fruits-container" class="row">
-                <!-- Les fruits seront ajoutés ici dynamiquement -->
+              <!-- Les fruits seront ajoutés ici dynamiquement -->
             </div>
-            
-            <div class="json-control">
-                <h4>Gestion des fruits du démon</h4>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <button id="export-fruits" class="btn btn-purple">Exporter les fruits (JSON)</button>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="import-fruits-file" accept=".json">
-                            <button class="btn btn-purple" id="import-fruits">Importer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modification Statistiques Page -->
-    <div id="modif-stats" class="page">
-        <div class="container py-5">
+            <div class="json-control">
+              <h4>Gestion des fruits du démon</h4>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <button id="export-fruits" class="btn btn-purple">
+                    Exporter les fruits (JSON)
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="import-fruits-file"
+                      accept=".json"
+                    />
+                    <button class="btn btn-purple" id="import-fruits">
+                      Importer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modification Statistiques Page -->
+        <div id="modif-stats" class="page">
+          <div class="container py-5">
             <h2 class="mb-4">Modification des Statistiques</h2>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Modifier un Fruit du Démon</h3>
-                        <form id="fruit-stats-form">
-                            <div class="mb-3">
-                                <label for="fruit-select" class="form-label">Sélectionner un Fruit</label>
-                                <select id="fruit-select" class="form-select">
-                                    <option selected disabled>Choisir un fruit</option>
-                                    <!-- Options ajoutées dynamiquement -->
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="fruit-degats" class="form-label">Dégâts/min</label>
-                                <input type="number" class="form-control" id="fruit-degats" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fruit-debuff" class="form-label">Debuff Entités</label>
-                                <input type="number" class="form-control" id="fruit-debuff" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fruit-buff" class="form-label">Buff Utilisateur</label>
-                                <input type="number" class="form-control" id="fruit-buff" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fruit-heal" class="form-label">Heal Utilisateur</label>
-                                <input type="number" class="form-control" id="fruit-heal" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fruit-pv" class="form-label">PV MAX (Palier 1)</label>
-                                <input type="number" class="form-control" id="fruit-pv" min="0">
-                            </div>
-                            <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-purple">Enregistrer</button>
-                                <button type="button" id="delete-fruit" class="btn btn-danger">Supprimer</button>
-                            </div>
-                        </form>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Modifier un Fruit du Démon</h3>
+                  <form id="fruit-stats-form">
+                    <div class="mb-3">
+                      <label for="fruit-select" class="form-label"
+                        >Sélectionner un Fruit</label
+                      >
+                      <select id="fruit-select" class="form-select">
+                        <option selected disabled>Choisir un fruit</option>
+                        <!-- Options ajoutées dynamiquement -->
+                      </select>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Ajouter un Nouveau Fruit</h3>
-                        <form id="new-fruit-form">
-                            <div class="mb-3">
-                                <label for="new-fruit-id" class="form-label">ID du Fruit (unique)</label>
-                                <input type="text" class="form-control" id="new-fruit-id" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-fruit-name" class="form-label">Nom du Fruit</label>
-                                <input type="text" class="form-control" id="new-fruit-name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-fruit-desc" class="form-label">Description</label>
-                                <textarea class="form-control" id="new-fruit-desc" rows="2"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-fruit-degats" class="form-label">Dégâts/min</label>
-                                <input type="number" class="form-control" id="new-fruit-degats" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-fruit-debuff" class="form-label">Debuff Entités</label>
-                                <input type="number" class="form-control" id="new-fruit-debuff" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-fruit-buff" class="form-label">Buff Utilisateur</label>
-                                <input type="number" class="form-control" id="new-fruit-buff" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-fruit-heal" class="form-label">Heal Utilisateur</label>
-                                <input type="number" class="form-control" id="new-fruit-heal" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-fruit-pv" class="form-label">PV MAX (Palier 1)</label>
-                                <input type="number" class="form-control" id="new-fruit-pv" min="0" required>
-                            </div>
-                            <button type="submit" class="btn btn-purple">Ajouter</button>
-                        </form>
+                    <div class="mb-3">
+                      <label for="fruit-degats" class="form-label"
+                        >Dégâts/min</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="fruit-degats"
+                        min="0"
+                      />
                     </div>
+                    <div class="mb-3">
+                      <label for="fruit-debuff" class="form-label"
+                        >Debuff Entités</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="fruit-debuff"
+                        min="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="fruit-buff" class="form-label"
+                        >Buff Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="fruit-buff"
+                        min="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="fruit-heal" class="form-label"
+                        >Heal Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="fruit-heal"
+                        min="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="fruit-pv" class="form-label"
+                        >PV MAX (Palier 1)</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="fruit-pv"
+                        min="0"
+                      />
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button type="submit" class="btn btn-purple">
+                        Enregistrer
+                      </button>
+                      <button
+                        type="button"
+                        id="delete-fruit"
+                        class="btn btn-danger"
+                      >
+                        Supprimer
+                      </button>
+                    </div>
+                  </form>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Ajouter un Nouveau Fruit</h3>
+                  <form id="new-fruit-form">
+                    <div class="mb-3">
+                      <label for="new-fruit-id" class="form-label"
+                        >ID du Fruit (unique)</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="new-fruit-id"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-fruit-name" class="form-label"
+                        >Nom du Fruit</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="new-fruit-name"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-fruit-desc" class="form-label"
+                        >Description</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="new-fruit-desc"
+                        rows="2"
+                      ></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-fruit-degats" class="form-label"
+                        >Dégâts/min</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-fruit-degats"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-fruit-debuff" class="form-label"
+                        >Debuff Entités</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-fruit-debuff"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-fruit-buff" class="form-label"
+                        >Buff Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-fruit-buff"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-fruit-heal" class="form-label"
+                        >Heal Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-fruit-heal"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-fruit-pv" class="form-label"
+                        >PV MAX (Palier 1)</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-fruit-pv"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-purple">
+                      Ajouter
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
-            
+
             <!-- Section pour Classes -->
             <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Modifier une Classe</h3>
-                        <form id="classe-stats-form">
-                            <div class="mb-3">
-                                <label for="classe-select" class="form-label">Sélectionner une Classe</label>
-                                <select id="classe-select" class="form-select">
-                                    <option selected disabled>Choisir une classe</option>
-                                    <!-- Options ajoutées dynamiquement -->
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="classe-degats" class="form-label">Dégâts/min</label>
-                                <input type="number" class="form-control" id="classe-degats" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="classe-debuff" class="form-label">Debuff Entités</label>
-                                <input type="number" class="form-control" id="classe-debuff" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="classe-buff" class="form-label">Buff Utilisateur</label>
-                                <input type="number" class="form-control" id="classe-buff" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="classe-heal" class="form-label">Heal Utilisateur</label>
-                                <input type="number" class="form-control" id="classe-heal" min="0">
-                            </div>
-                            <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-purple">Enregistrer</button>
-                                <button type="button" id="delete-classe" class="btn btn-danger">Supprimer</button>
-                            </div>
-                        </form>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Modifier une Classe</h3>
+                  <form id="classe-stats-form">
+                    <div class="mb-3">
+                      <label for="classe-select" class="form-label"
+                        >Sélectionner une Classe</label
+                      >
+                      <select id="classe-select" class="form-select">
+                        <option selected disabled>Choisir une classe</option>
+                        <!-- Options ajoutées dynamiquement -->
+                      </select>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Ajouter une Nouvelle Classe</h3>
-                        <form id="new-classe-form">
-                            <div class="mb-3">
-                                <label for="new-classe-id" class="form-label">ID de la Classe (unique)</label>
-                                <input type="text" class="form-control" id="new-classe-id" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-classe-name" class="form-label">Nom de la Classe</label>
-                                <input type="text" class="form-control" id="new-classe-name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-classe-desc" class="form-label">Description</label>
-                                <textarea class="form-control" id="new-classe-desc" rows="2"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-classe-degats" class="form-label">Dégâts/min</label>
-                                <input type="number" class="form-control" id="new-classe-degats" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-classe-debuff" class="form-label">Debuff Entités</label>
-                                <input type="number" class="form-control" id="new-classe-debuff" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-classe-buff" class="form-label">Buff Utilisateur</label>
-                                <input type="number" class="form-control" id="new-classe-buff" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-classe-heal" class="form-label">Heal Utilisateur</label>
-                                <input type="number" class="form-control" id="new-classe-heal" min="0" required>
-                            </div>
-                            <button type="submit" class="btn btn-purple">Ajouter</button>
-                        </form>
+                    <div class="mb-3">
+                      <label for="classe-degats" class="form-label"
+                        >Dégâts/min</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="classe-degats"
+                        min="0"
+                      />
                     </div>
+                    <div class="mb-3">
+                      <label for="classe-debuff" class="form-label"
+                        >Debuff Entités</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="classe-debuff"
+                        min="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="classe-buff" class="form-label"
+                        >Buff Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="classe-buff"
+                        min="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="classe-heal" class="form-label"
+                        >Heal Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="classe-heal"
+                        min="0"
+                      />
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button type="submit" class="btn btn-purple">
+                        Enregistrer
+                      </button>
+                      <button
+                        type="button"
+                        id="delete-classe"
+                        class="btn btn-danger"
+                      >
+                        Supprimer
+                      </button>
+                    </div>
+                  </form>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Ajouter une Nouvelle Classe</h3>
+                  <form id="new-classe-form">
+                    <div class="mb-3">
+                      <label for="new-classe-id" class="form-label"
+                        >ID de la Classe (unique)</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="new-classe-id"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-classe-name" class="form-label"
+                        >Nom de la Classe</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="new-classe-name"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-classe-desc" class="form-label"
+                        >Description</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="new-classe-desc"
+                        rows="2"
+                      ></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-classe-degats" class="form-label"
+                        >Dégâts/min</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-classe-degats"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-classe-debuff" class="form-label"
+                        >Debuff Entités</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-classe-debuff"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-classe-buff" class="form-label"
+                        >Buff Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-classe-buff"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-classe-heal" class="form-label"
+                        >Heal Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-classe-heal"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-purple">
+                      Ajouter
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
-            
+
             <!-- Section pour Races -->
             <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Modifier une Race</h3>
-                        <form id="race-stats-form">
-                            <div class="mb-3">
-                                <label for="race-select" class="form-label">Sélectionner une Race</label>
-                                <select id="race-select" class="form-select">
-                                    <option selected disabled>Choisir une race</option>
-                                    <!-- Options ajoutées dynamiquement -->
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="race-degats" class="form-label">Dégâts/min</label>
-                                <input type="number" class="form-control" id="race-degats" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="race-debuff" class="form-label">Debuff Entités</label>
-                                <input type="number" class="form-control" id="race-debuff" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="race-buff" class="form-label">Buff Utilisateur</label>
-                                <input type="number" class="form-control" id="race-buff" min="0">
-                            </div>
-                            <div class="mb-3">
-                                <label for="race-heal" class="form-label">Heal Utilisateur</label>
-                                <input type="number" class="form-control" id="race-heal" min="0">
-                            </div>
-                            <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-purple">Enregistrer</button>
-                                <button type="button" id="delete-race" class="btn btn-danger">Supprimer</button>
-                            </div>
-                        </form>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Modifier une Race</h3>
+                  <form id="race-stats-form">
+                    <div class="mb-3">
+                      <label for="race-select" class="form-label"
+                        >Sélectionner une Race</label
+                      >
+                      <select id="race-select" class="form-select">
+                        <option selected disabled>Choisir une race</option>
+                        <!-- Options ajoutées dynamiquement -->
+                      </select>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Ajouter une Nouvelle Race</h3>
-                        <form id="new-race-form">
-                            <div class="mb-3">
-                                <label for="new-race-id" class="form-label">ID de la Race (unique)</label>
-                                <input type="text" class="form-control" id="new-race-id" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-race-name" class="form-label">Nom de la Race</label>
-                                <input type="text" class="form-control" id="new-race-name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-race-desc" class="form-label">Description</label>
-                                <textarea class="form-control" id="new-race-desc" rows="2"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-race-degats" class="form-label">Dégâts/min</label>
-                                <input type="number" class="form-control" id="new-race-degats" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-race-debuff" class="form-label">Debuff Entités</label>
-                                <input type="number" class="form-control" id="new-race-debuff" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-race-buff" class="form-label">Buff Utilisateur</label>
-                                <input type="number" class="form-control" id="new-race-buff" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-race-heal" class="form-label">Heal Utilisateur</label>
-                                <input type="number" class="form-control" id="new-race-heal" min="0" required>
-                            </div>
-                            <button type="submit" class="btn btn-purple">Ajouter</button>
-                        </form>
+                    <div class="mb-3">
+                      <label for="race-degats" class="form-label"
+                        >Dégâts/min</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="race-degats"
+                        min="0"
+                      />
                     </div>
+                    <div class="mb-3">
+                      <label for="race-debuff" class="form-label"
+                        >Debuff Entités</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="race-debuff"
+                        min="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="race-buff" class="form-label"
+                        >Buff Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="race-buff"
+                        min="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="race-heal" class="form-label"
+                        >Heal Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="race-heal"
+                        min="0"
+                      />
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button type="submit" class="btn btn-purple">
+                        Enregistrer
+                      </button>
+                      <button
+                        type="button"
+                        id="delete-race"
+                        class="btn btn-danger"
+                      >
+                        Supprimer
+                      </button>
+                    </div>
+                  </form>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Ajouter une Nouvelle Race</h3>
+                  <form id="new-race-form">
+                    <div class="mb-3">
+                      <label for="new-race-id" class="form-label"
+                        >ID de la Race (unique)</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="new-race-id"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-race-name" class="form-label"
+                        >Nom de la Race</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="new-race-name"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-race-desc" class="form-label"
+                        >Description</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="new-race-desc"
+                        rows="2"
+                      ></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-race-degats" class="form-label"
+                        >Dégâts/min</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-race-degats"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-race-debuff" class="form-label"
+                        >Debuff Entités</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-race-debuff"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-race-buff" class="form-label"
+                        >Buff Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-race-buff"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-race-heal" class="form-label"
+                        >Heal Utilisateur</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-race-heal"
+                        min="0"
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-purple">
+                      Ajouter
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
-            
-            <div class="json-control mt-4">
-                <h4>Base de données</h4>
-                <div class="mb-3">
-                    <label for="database-json" class="form-label">Base de données JSON complète</label>
-                    <textarea class="form-control" id="database-json" rows="10" readOnly></textarea>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <button id="update-database" class="btn btn-purple">Mettre à jour la base de données</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button id="reset-database" class="btn btn-danger">Réinitialiser la base de données</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modif Paliers Page -->
-    <div id="modif-paliers" class="page">
-        <div class="container py-5">
+            <div class="json-control mt-4">
+              <h4>Base de données</h4>
+              <div class="mb-3">
+                <label for="database-json" class="form-label"
+                  >Base de données JSON complète</label
+                >
+                <textarea
+                  class="form-control"
+                  id="database-json"
+                  rows="10"
+                ></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <button id="update-database" class="btn btn-purple">
+                    Mettre à jour la base de données
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button id="reset-database" class="btn btn-danger">
+                    Réinitialiser la base de données
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modif Paliers Page -->
+        <div id="modif-paliers" class="page">
+          <div class="container py-5">
             <h2 class="mb-4">Gestion des Paliers</h2>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Modifier un Palier</h3>
-                        <form id="palier-edit-form">
-                            <div class="mb-3">
-                                <label for="palier-select" class="form-label">Sélectionner un Palier</label>
-                                <select id="palier-select" class="form-select">
-                                    <option selected disabled>Choisir un palier</option>
-                                    <!-- Options ajoutées dynamiquement -->
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="palier-niveau" class="form-label">Niveau du Palier</label>
-                                <input type="number" class="form-control" id="palier-niveau" min="1" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="palier-pv" class="form-label">Points de Vie (PV)</label>
-                                <input type="number" class="form-control" id="palier-pv" min="1" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="palier-description" class="form-label">Description</label>
-                                <textarea class="form-control" id="palier-description" rows="2"></textarea>
-                            </div>
-                            <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-purple">Enregistrer</button>
-                                <button type="button" id="delete-palier" class="btn btn-danger">Supprimer</button>
-                            </div>
-                        </form>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Modifier un Palier</h3>
+                  <form id="palier-edit-form">
+                    <div class="mb-3">
+                      <label for="palier-select" class="form-label"
+                        >Sélectionner un Palier</label
+                      >
+                      <select id="palier-select" class="form-select">
+                        <option selected disabled>Choisir un palier</option>
+                        <!-- Options ajoutées dynamiquement -->
+                      </select>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="stats-card">
-                        <h3>Ajouter un Nouveau Palier</h3>
-                        <form id="new-palier-form">
-                            <div class="mb-3">
-                                <label for="new-palier-id" class="form-label">ID du Palier (unique)</label>
-                                <input type="text" class="form-control" id="new-palier-id" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-palier-niveau" class="form-label">Niveau du Palier</label>
-                                <input type="number" class="form-control" id="new-palier-niveau" min="1" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-palier-pv" class="form-label">Points de Vie (PV)</label>
-                                <input type="number" class="form-control" id="new-palier-pv" min="1" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="new-palier-description" class="form-label">Description</label>
-                                <textarea class="form-control" id="new-palier-description" rows="2"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-purple">Ajouter</button>
-                        </form>
+                    <div class="mb-3">
+                      <label for="palier-niveau" class="form-label"
+                        >Niveau du Palier</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="palier-niveau"
+                        min="1"
+                        required
+                      />
                     </div>
+                    <div class="mb-3">
+                      <label for="palier-pv" class="form-label"
+                        >Points de Vie (PV)</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="palier-pv"
+                        min="1"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="palier-description" class="form-label"
+                        >Description</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="palier-description"
+                        rows="2"
+                      ></textarea>
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button type="submit" class="btn btn-purple">
+                        Enregistrer
+                      </button>
+                      <button
+                        type="button"
+                        id="delete-palier"
+                        class="btn btn-danger"
+                      >
+                        Supprimer
+                      </button>
+                    </div>
+                  </form>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stats-card">
+                  <h3>Ajouter un Nouveau Palier</h3>
+                  <form id="new-palier-form">
+                    <div class="mb-3">
+                      <label for="new-palier-id" class="form-label"
+                        >ID du Palier (unique)</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="new-palier-id"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-palier-niveau" class="form-label"
+                        >Niveau du Palier</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-palier-niveau"
+                        min="1"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-palier-pv" class="form-label"
+                        >Points de Vie (PV)</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="new-palier-pv"
+                        min="1"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="new-palier-description" class="form-label"
+                        >Description</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="new-palier-description"
+                        rows="2"
+                      ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-purple">
+                      Ajouter
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
-            
+
             <div class="stats-card mt-4">
-                <h3>Liste des Paliers</h3>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Niveau</th>
-                                <th>Points de Vie</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody id="paliers-list">
-                            <!-- Liste des paliers ajoutée dynamiquement -->
-                        </tbody>
-                    </table>
-                </div>
+              <h3>Liste des Paliers</h3>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Niveau</th>
+                      <th>Points de Vie</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody id="paliers-list">
+                    <!-- Liste des paliers ajoutée dynamiquement -->
+                  </tbody>
+                </table>
+              </div>
             </div>
-            
+
             <div class="json-control mt-4">
-                <h4>Gestion des paliers</h4>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <button id="export-paliers" class="btn btn-purple">Exporter les paliers (JSON)</button>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="import-paliers-file" accept=".json">
-                            <button class="btn btn-purple" id="import-paliers">Importer</button>
-                        </div>
-                    </div>
+              <h4>Gestion des paliers</h4>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <button id="export-paliers" class="btn btn-purple">
+                    Exporter les paliers (JSON)
+                  </button>
                 </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="import-paliers-file"
+                      accept=".json"
+                    />
+                    <button class="btn btn-purple" id="import-paliers">
+                      Importer
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    
-    <!-- Listes Page -->
-    <div id="listes" class="page">
-        <div class="container py-5">
+
+        <!-- Listes Page -->
+        <div id="listes" class="page">
+          <div class="container py-5">
             <h2 class="mb-4">Listes complètes</h2>
-            
+
             <!-- Nav tabs pour les différentes listes -->
             <ul class="nav nav-tabs mb-4" id="listeTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="fruits-tab" data-bs-toggle="tab" data-bs-target="#liste-fruits" type="button" role="tab" aria-controls="liste-fruits" aria-selected="true">Fruits du Démon</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="races-tab" data-bs-toggle="tab" data-bs-target="#liste-races" type="button" role="tab" aria-controls="liste-races" aria-selected="false">Races</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="classes-tab" data-bs-toggle="tab" data-bs-target="#liste-classes" type="button" role="tab" aria-controls="liste-classes" aria-selected="false">Classes</button>
-                </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="fruits-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#liste-fruits"
+                  type="button"
+                  role="tab"
+                  aria-controls="liste-fruits"
+                  aria-selected="true"
+                >
+                  Fruits du Démon
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="races-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#liste-races"
+                  type="button"
+                  role="tab"
+                  aria-controls="liste-races"
+                  aria-selected="false"
+                >
+                  Races
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="classes-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#liste-classes"
+                  type="button"
+                  role="tab"
+                  aria-controls="liste-classes"
+                  aria-selected="false"
+                >
+                  Classes
+                </button>
+              </li>
             </ul>
-            
+
             <!-- Contenu des tabs -->
             <div class="tab-content" id="listeTabsContent">
-                <!-- Liste des Fruits du Démon -->
-                <div class="tab-pane fade show active" id="liste-fruits" role="tabpanel" aria-labelledby="fruits-tab">
-                    <div class="stats-card">
-                        <h3>Fruits du Démon</h3>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nom</th>
-                                        <th>Description</th>
-                                        <th>Dégâts/min</th>
-                                        <th>Debuff Entités</th>
-                                        <th>Buff Utilisateur</th>
-                                        <th>Heal Utilisateur</th>
-                                        <th>PV MAX (Palier 1)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="liste-fruits-body">
-                                    <!-- Liste des fruits ajoutée dynamiquement -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+              <!-- Liste des Fruits du Démon -->
+              <div
+                class="tab-pane fade show active"
+                id="liste-fruits"
+                role="tabpanel"
+                aria-labelledby="fruits-tab"
+              >
+                <div class="stats-card">
+                  <h3>Fruits du Démon</h3>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Nom</th>
+                          <th>Description</th>
+                          <th>Dégâts/min</th>
+                          <th>Debuff Entités</th>
+                          <th>Buff Utilisateur</th>
+                          <th>Heal Utilisateur</th>
+                          <th>PV MAX (Palier 1)</th>
+                        </tr>
+                      </thead>
+                      <tbody id="liste-fruits-body">
+                        <!-- Liste des fruits ajoutée dynamiquement -->
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                
-                <!-- Liste des Races -->
-                <div class="tab-pane fade" id="liste-races" role="tabpanel" aria-labelledby="races-tab">
-                    <div class="stats-card">
-                        <h3>Races</h3>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nom</th>
-                                        <th>Description</th>
-                                        <th>Dégâts/min</th>
-                                        <th>Debuff Entités</th>
-                                        <th>Buff Utilisateur</th>
-                                        <th>Heal Utilisateur</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="liste-races-body">
-                                    <!-- Liste des races ajoutée dynamiquement -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+              </div>
 
-            
-                
-                <!-- Liste des Classes -->
-                <div class="tab-pane fade" id="liste-classes" role="tabpanel" aria-labelledby="classes-tab">
-                    <div class="stats-card">
-                        <h3>Classes</h3>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nom</th>
-                                        <th>Description</th>
-                                        <th>Dégâts/min</th>
-                                        <th>Debuff Entités</th>
-                                        <th>Buff Utilisateur</th>
-                                        <th>Heal Utilisateur</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="liste-classes-body">
-                                    <!-- Liste des classes ajoutée dynamiquement -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+              <div
+                class="tab-pane fade"
+                id="liste-races"
+                role="tabpanel"
+                aria-labelledby="races-tab"
+              >
+                <div class="stats-card">
+                  <h3>Races</h3>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Nom</th>
+                          <th>Description</th>
+                          <th>Dégâts/min</th>
+                          <th>Debuff Entités</th>
+                          <th>Buff Utilisateur</th>
+                          <th>Heal Utilisateur</th>
+                        </tr>
+                      </thead>
+                      <tbody id="liste-races-body">
+                        <!-- Liste des races ajoutée dynamiquement -->
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+              </div>
+
+              <!-- Liste des Classes -->
+              <div
+                class="tab-pane fade"
+                id="liste-classes"
+                role="tabpanel"
+                aria-labelledby="classes-tab"
+              >
+                <div class="stats-card">
+                  <h3>Classes</h3>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Nom</th>
+                          <th>Description</th>
+                          <th>Dégâts/min</th>
+                          <th>Debuff Entités</th>
+                          <th>Buff Utilisateur</th>
+                          <th>Heal Utilisateur</th>
+                        </tr>
+                      </thead>
+                      <tbody id="liste-classes-body">
+                        <!-- Liste des classes ajoutée dynamiquement -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </main>
     </div>
-</main>
-
-<!-- Bootstrap JS Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Custom JavaScript -->
-<script src="assets/js/stats.js"></script>
-<script src="assets/js/easter-egg.js"></script>
-</body>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="assets/js/electron-imports.js"></script>
+    <script src="assets/js/stats.js"></script>
+    <script src="assets/js/easter-egg.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/titlebar.js"></script>
+  </body>
 </html>

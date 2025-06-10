@@ -1,0 +1,422 @@
+/* =================================
+   RESPONSIVE DESIGN FIXES
+   ================================= */
+
+/* Media Queries pour différentes tailles d'écran */
+
+/* Très petits écrans (smartphones en portrait) */
+@media (max-width: 575.98px) {
+  /* Header responsive */
+  .header {
+    padding: 0.5rem;
+  }
+  
+  .header .container-fluid {
+    padding: 0;
+  }
+  
+  .header .row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .header .col-auto:first-child {
+    text-align: center;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* Navigation responsive */
+  .header .d-flex {
+    flex-wrap: wrap;
+    gap: 0.25rem !important;
+    justify-content: center;
+  }
+  
+  .header .btn {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    flex: 1;
+    min-width: calc(50% - 0.125rem);
+    text-align: center;
+  }
+  
+  /* Theme toggle */
+  .theme-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  /* Sections des joueurs */
+  .d-flex.border-bottom {
+    flex-direction: column !important;
+  }
+  
+  .player-section {
+    padding: 1rem;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .player-section:last-child {
+    border-bottom: none;
+  }
+  
+  .player-section h2 {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Formulaires responsive */
+  .player-section .row .col-md-4,
+  .player-section .row .col-md-6 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Combat section */
+  .combat-section {
+    padding: 1rem;
+    margin-top: 3rem;
+  }
+  
+  .combat-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+  
+  /* Stats cards */
+  .stats-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Tableaux responsive */
+  .table-responsive {
+    font-size: 0.8rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.25rem;
+    white-space: nowrap;
+  }
+  
+  /* Formulaires dans les stats cards */
+  .stats-card .row {
+    margin: 0;
+  }
+  
+  .stats-card .col-md-6 {
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  
+  /* JSON control */
+  .json-control {
+    padding: 1rem;
+  }
+  
+  .json-control .row .col-md-6 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Titlebar responsive */
+  .titlebar {
+    padding: 0 0.5rem;
+  }
+  
+  .titlebar-title {
+    font-size: 0.75rem;
+  }
+  
+  .titlebar-title img {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .titlebar-btn {
+    width: 36px;
+    height: 28px;
+  }
+}
+
+/* Petits écrans (smartphones en paysage et petites tablettes) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .header {
+    padding: 0.75rem;
+  }
+  
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .header .d-flex {
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+  }
+  
+  .header .btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    flex: 1;
+    min-width: calc(33.333% - 0.33rem);
+  }
+  
+  /* Sections des joueurs */
+  .d-flex.border-bottom {
+    flex-direction: column !important;
+  }
+  
+  .player-section {
+    padding: 1.5rem;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .player-section:last-child {
+    border-bottom: none;
+  }
+  
+  .combat-section {
+    padding: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  
+  .combat-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .stats-card .col-md-6 {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Tablettes */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .header .d-flex {
+    gap: 0.5rem !important;
+  }
+  
+  .header .btn {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+  
+  /* Ajustement des sections joueurs */
+  .player-section {
+    padding: 1.5rem;
+  }
+  
+  .combat-section {
+    padding: 1.5rem;
+  }
+  
+  /* Formulaires en 2 colonnes sur tablette */
+  .player-section .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .player-section .col-md-6 {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Écrans moyens (petits ordinateurs portables) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .header .btn {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .player-section {
+    padding: 1.75rem;
+  }
+}
+
+/* Améliorations générales pour tous les écrans */
+
+/* Navigation sticky sur mobile */
+@media (max-width: 767.98px) {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+}
+
+/* Amélioration des tableaux sur tous les écrans */
+.table-responsive {
+  border-radius: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 991.98px) {
+  .table-responsive table {
+    min-width: 600px;
+  }
+  
+  .table th,
+  .table td {
+    white-space: nowrap;
+    font-size: 0.875rem;
+  }
+}
+
+/* Amélioration des formulaires */
+@media (max-width: 767.98px) {
+  .form-control,
+  .form-select {
+    font-size: 16px; /* Évite le zoom sur iOS */
+  }
+  
+  .btn {
+    min-height: 44px; /* Taille minimum pour les touches tactiles */
+  }
+}
+
+/* Amélioration des modales et contenus */
+@media (max-width: 575.98px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* Amélioration de l'espacement vertical */
+@media (max-width: 767.98px) {
+  .mb-4 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem !important;
+  }
+  
+  .g-4 > * {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+/* Amélioration des onglets sur mobile */
+@media (max-width: 575.98px) {
+  .nav-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .nav-tabs .nav-item {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .nav-tabs .nav-link {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.25rem;
+  }
+}
+
+/* Amélioration du combat results */
+@media (max-width: 767.98px) {
+  #combat-results {
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+  
+  .combat-result {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+/* Amélioration des boutons d'action */
+@media (max-width: 575.98px) {
+  .d-flex.gap-2 {
+    flex-direction: column;
+    gap: 0.5rem !important;
+  }
+  
+  .d-flex.gap-2 .btn {
+    width: 100%;
+  }
+}
+
+/* Amélioration de la zone de texte JSON */
+@media (max-width: 767.98px) {
+  #database-json {
+    font-size: 0.8rem;
+    min-height: 200px;
+  }
+}
+
+/* Scroll horizontal pour les grandes tables */
+.table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: var(--purple-primary);
+  border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #4c2486;
+}
+
+/* Amélioration de l'accessibilité tactile */
+@media (max-width: 767.98px) {
+  .titlebar-btn {
+    min-width: 44px;
+    min-height: 32px;
+  }
+  
+  .theme-toggle {
+    min-width: 60px;
+    min-height: 44px;
+  }
+}
+
+/* Optimisation pour les écrans très larges */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1200px;
+  }
+  
+  .player-section {
+    padding: 2.5rem;
+  }
+  
+  .stats-card {
+    padding: 2rem;
+  }
+}

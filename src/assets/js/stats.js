@@ -661,7 +661,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </ul>
                     </div>
                 </div>
-                <div class="mt-4 p-3 bg-light rounded">
+                <div class="combat-result">
                     <h4 class="winner">Vainqueur: ${winner.nom} (${winner.fddName})</h4>
                     <p>Temps pour vaincre l'adversaire: ${winnerTime === Number.POSITIVE_INFINITY ? "∞" : winnerTime.toFixed(2)} minutes</p>
                     <p>Explication: ${winner.nom} peut vaincre ${loser.nom} plus rapidement (${winnerTime === Number.POSITIVE_INFINITY ? "∞" : winnerTime.toFixed(2)} minutes contre ${loserTime === Number.POSITIVE_INFINITY ? "∞" : loserTime.toFixed(2)} minutes).</p>
@@ -1451,7 +1451,7 @@ function updateCombatHistory() {
             <div class="history-item">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h4>Combat #${index + 1}</h4>
-                    <small class="text-muted">${date}</small>
+                    <small class="combat-result">${date}</small>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
@@ -1474,7 +1474,7 @@ function updateCombatHistory() {
                         </ul>
                     </div>
                 </div>
-                <div class="mt-3 p-2 bg-light rounded">
+                <div class="combat-result">
                     <h5 class="winner">Vainqueur: ${winner.nom} (${winner.fddName})</h5>
                     <p>Temps: ${combat.winnerTime === Number.POSITIVE_INFINITY ? "∞" : combat.winnerTime.toFixed(2)} minutes contre ${combat.loserTime === Number.POSITIVE_INFINITY ? "∞" : combat.loserTime.toFixed(2)} minutes</p>
                 </div>
